@@ -38,7 +38,7 @@ def collect_and_persist_scores(y_test, y_pred, key="unknown"):
   results.update({'recall_score': calculate_score(recall_score, y_test, y_pred)})
   results.update({'roc_auc_score': calculate_score(roc_auc_score, y_test, y_pred)})
   print(results)
-  with open(f"automl_{key}.json", "w") as outfile:
+  with open(f"./results/automl_{key}.json", "w") as outfile:
     json.dump(results, outfile)
 
 def load_csv(dataset_folder, filename):

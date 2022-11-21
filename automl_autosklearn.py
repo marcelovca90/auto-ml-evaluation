@@ -3,7 +3,7 @@ from autosklearn.classification import AutoSklearnClassifier
 
 X_train, X_test, y_train, y_test = load_openml()
 
-clf = AutoSklearnClassifier(time_left_for_this_task=1*60, resampling_strategy="cv", resampling_strategy_arguments={"folds": 5}, seed=SEED)
+clf = AutoSklearnClassifier(time_left_for_this_task=10*60, resampling_strategy="cv", resampling_strategy_arguments={"folds": 5}, seed=SEED)
 
 TIMER.tic()
 clf.fit(X_train, y_train)

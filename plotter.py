@@ -6,13 +6,16 @@ import os
 plt.figure(figsize=(32,24))
 plt.rcParams['font.size'] = '16'
 
-for filename in os.listdir("."):
+for filename in os.listdir("./results"):
+    idx = 0
     if filename.endswith('.json'):
-        with open(filename) as file:
+        with open(f'results/{filename}') as file:
             content = json.load(file)
             x = filename.replace('automl_', '').replace('.json', '')
             y = content['roc_auc_score']
             plt.bar(x, y)
+            plt.text(idx, y+0.01,f'{100*y:.2f}%')
+            idx += 1
 
 plt.title('Results')
-plt.savefig(f'results.png')
+plt.savefig(f'./results/automl.png')

@@ -3,7 +3,7 @@ from tpot import TPOTClassifier
 
 X_train, X_test, y_train, y_test = load_openml()
 
-clf = TPOTClassifier(max_time_mins=1, cv=5, random_state=SEED)
+clf = TPOTClassifier(max_time_mins=10, cv=5, random_state=SEED)
 
 TIMER.tic()
 clf.fit(X_train, y_train)

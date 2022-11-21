@@ -12,7 +12,7 @@ clf.search(
     X_test=X_test,
     y_test=y_test,
     optimize_metric='accuracy',
-    total_walltime_limit=1*60,
+    total_walltime_limit=10*60,
     func_eval_time_limit_secs=60
 )
 TIMER.toc()

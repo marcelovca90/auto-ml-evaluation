@@ -1,1 +1,0 @@
-{"accuracy_score": 0.9587404994571118, "average_precision_score": 0.9299452715979375, "balanced_accuracy_score": 0.9560480950311459, "f1_score_micro": 0.9587404994571118, "f1_score_macro": 0.9576007947276604, "f1_score_weighted": 0.9586650223227111, "precision_score": 0.9631578947368421, "recall_score": 0.9384615384615385, "roc_auc_score": 0.9560480950311459}

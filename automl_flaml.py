@@ -6,7 +6,7 @@ X_train, X_test, y_train, y_test = load_openml()
 clf = AutoML()
 
 TIMER.tic()
-clf.fit(X_train, y_train, task="classification", time_budget=1*10)
+clf.fit(X_train, y_train, task="classification", time_budget=10*60)
 TIMER.toc()
 
 TIMER.tic()
