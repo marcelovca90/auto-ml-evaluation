@@ -1,5 +1,21 @@
 # auto-ml-comparison
 
+Abrir Prompt de Comando como Administrador
+
+bcdedit /set hypervisorlaunchtype off
+
+DISM /Online /Disable-Feature:Microsoft-Hyper-V
+
+No menu Iniciar, digitar "Ativar ou desativar recursos do Windows"
+
+Desabilitar Hyper-V
+
+Desabilitar Plataforma de Máquina Virtual
+
+Desabilitar Plataforma do Hipervisor do Windows
+
+Reiniciar o computador
+
 Criar VM do Ubuntu (22.04.1 LTS) no VirtualBox
 (usuário e senha automl; nome da máquina automl-vbox)
 (alocar pelo menos 8GB de RAM e 2 núcleos de CPU)
