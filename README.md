@@ -34,6 +34,10 @@
 	- reboot
 	- sudo apt-get install git build-essential software-properties-common swig python3.8 python3.- 8-dev python3.8-venv python3.8-distutils default-jre -y
 	- snap install code --classic
+	- wget "https://github.com/GitCredentialManager/git-credential-manager/releases/download/v2.0.696/gcmcore-linux_amd64.2.0.696.deb" -O /tmp/gcmcore.deb
+	- sudo dpkg -i /tmp/gcmcore.deb
+	- git-credential-manager-core configure
+	- export GCM_CREDENTIAL_STORE=secretservice
 	- git clone https://github.com/marcelovca90/auto-ml-comparison.git
 	- cd auto-ml-comparison
 	- chmod +x run.sh
