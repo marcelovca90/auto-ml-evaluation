@@ -35,6 +35,10 @@ sudo apt-get autoremove -y
 
 reboot
 
+Verificar se a "tartaruga verde" não está aparecendo no canto inferior direito da VM
+
+Verificar se a instrução AVX está na lista de instruções suportadas pelo CPU: more /proc/cpuinfo | grep flags | grep avx
+
 sudo apt-get install git build-essential software-properties-common swig python3.8 python3.8-dev python3.8-venv python3.8-distutils default-jre -y
 
 snap install code --classic
