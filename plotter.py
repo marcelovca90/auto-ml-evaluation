@@ -2,7 +2,6 @@ import json
 import matplotlib.pyplot as plt
 import os
 
-
 # plot the best result for each classifier
 plt.figure(figsize=(32,24))
 plt.rcParams['font.size'] = '16'
