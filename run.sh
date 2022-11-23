@@ -17,7 +17,7 @@ source ./venv-autogluon/bin/activate
 python3.8 -m pip install --upgrade pip
 python3.8 -m pip install --upgrade setuptools pytictoc wheel torch==1.12+cpu torchvision==0.13.0+cpu torchtext==0.13.0 -f https://download.pytorch.org/whl/cpu/torch_stable.html autogluon
 python3.8 ./automl_autogluon.py
-
+ 
 # AutoKeras
 echo ======== AutoKeras ========
 python3.8 -m venv venv-autokeras
@@ -58,6 +58,14 @@ python3.8 -m pip install --upgrade pip
 python3.8 -m pip install --upgrade setuptools pytictoc wheel requests tabulate future scikit-learn pandas h2o
 python3.8 ./automl_h2o.py
 
+# LightAutoML
+echo ======== LightAutoML ========
+python3.8 -m venv venv-lightautoml
+source ./venv-lightautoml/bin/activate
+python3.8 -m pip install --upgrade pip
+python3.8 -m pip install --upgrade setuptools pytictoc wheel lightautoml
+python3.8 ./automl_lightautoml.py
+
 # PyCaret
 echo ======== PyCaret ========
 python3.8 -m venv venv-pycaret
@@ -73,7 +81,6 @@ source ./venv-tpot/bin/activate
 python3.8 -m pip install --upgrade pip
 python3.8 -m pip install --upgrade setuptools pytictoc wheel deap update_checker tqdm stopit xgboost torch tpot
 python3.8 ./automl_tpot.py
-
 # Plotter
 echo ======== Plotter ========
 python3.8 -m venv venv-plotter
@@ -83,4 +90,3 @@ python3.8 -m pip install --upgrade setuptools pytictoc wheel matplotlib
 python3.8 ./plotter.py
 
 echo Script execution finished at $(date).
-
