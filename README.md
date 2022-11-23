@@ -1,9 +1,5 @@
 # auto-ml-comparison
 
-- Baixar o [Oracle VM VirtualBox](https://download.virtualbox.org/virtualbox/7.0.4/VirtualBox-7.0.4-154605-Win.exe)
-
-- Baixar o Ubuntu [22.04.1 LTS](https://releases.ubuntu.com/22.04/ubuntu-22.04.1-desktop-amd64.iso)
-
 - Habilitar virtualização na BIOS da placa-mãe ([exemplo](https://www.youtube.com/watch?v=GK0DOfdLCa8))
 
 - Abrir Prompt de Comando como Administrador
@@ -16,6 +12,10 @@
 	- Desabilitar Plataforma do Hipervisor do Windows
 
 - Reiniciar o computador
+
+- Baixar o [Oracle VM VirtualBox](https://download.virtualbox.org/virtualbox/7.0.4/VirtualBox-7.0.4-154605-Win.exe)
+
+- Baixar o Ubuntu [22.04.1 LTS](https://releases.ubuntu.com/22.04/ubuntu-22.04.1-desktop-amd64.iso)
 
 - Criar VM do Ubuntu no VirtualBox
 	- Usuário e senha automl; nome da máquina automl-vbox
