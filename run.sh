@@ -48,7 +48,13 @@ source ./venv-h2o/bin/activate
 python3.8 -m pip install --upgrade pip
 python3.8 -m pip install --upgrade setuptools pytictoc requests tabulate future scikit-learn pandas h2o
 python3.8 ./automl_h2o.py
-
+# PyCaret
+echo ======== PyCaret ========
+python3.8 -m venv venv-pycaret
+source ./venv-pycaret/bin/activate
+python3.8 -m pip install --upgrade pip
+python3.8 -m pip install --upgrade setuptools pytictoc pycaret
+python3.8 ./automl_pycaret.py
 # TPOT
 echo ======== TPOT ========
 python3.8 -m venv venv-tpot
