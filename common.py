@@ -30,23 +30,23 @@ def calculate_score(metric, y_true, y_pred, **kwargs):
 	except:
 		return -1.0
 
-def collect_and_persist_results(y_test, y_pred, training_time, test_time, key="unknown"):
+def collect_and_persist_results(y_test, y_pred, training_time, test_time, framework="unknown"):
   results = {}
-  results.update({'accuracy_score': calculate_score(accuracy_score, y_test, y_pred)})
-  results.update({'average_precision_score': calculate_score(average_precision_score, y_test, y_pred)})
-  results.update({'balanced_accuracy_score': calculate_score(balanced_accuracy_score, y_test, y_pred)})
-  results.update({'cohen_kappa_score': calculate_score(cohen_kappa_score, y_test, y_pred)})
-  results.update({'f1_score_macro': calculate_score(f1_score, y_test, y_pred, average='macro')})
-  results.update({'f1_score_micro': calculate_score(f1_score, y_test, y_pred, average='micro')})
-  results.update({'f1_score_weighted': calculate_score(f1_score, y_test, y_pred, average='weighted')})
-  results.update({'matthews_corrcoef': calculate_score(matthews_corrcoef, y_test, y_pred)})
-  results.update({'precision_score': calculate_score(precision_score, y_test, y_pred)})
-  results.update({'recall_score': calculate_score(recall_score, y_test, y_pred)})
-  results.update({'roc_auc_score': calculate_score(roc_auc_score, y_test, y_pred)})
-  results.update({'training_time': time.strftime("%H:%M:%S", time.gmtime(training_time))})
-  results.update({'test_time': time.strftime("%H:%M:%S", time.gmtime(test_time))})
+  results.update({"accuracy_score":          calculate_score(accuracy_score, y_test, y_pred)})
+  results.update({"average_precision_score": calculate_score(average_precision_score, y_test, y_pred)})
+  results.update({"balanced_accuracy_score": calculate_score(balanced_accuracy_score, y_test, y_pred)})
+  results.update({"cohen_kappa_score":       calculate_score(cohen_kappa_score, y_test, y_pred)})
+  results.update({"f1_score_macro":          calculate_score(f1_score, y_test, y_pred, average="macro")})
+  results.update({"f1_score_micro":          calculate_score(f1_score, y_test, y_pred, average="micro")})
+  results.update({"f1_score_weighted":       calculate_score(f1_score, y_test, y_pred, average="weighted")})
+  results.update({"matthews_corrcoef":       calculate_score(matthews_corrcoef, y_test, y_pred)})
+  results.update({"precision_score":         calculate_score(precision_score, y_test, y_pred)})
+  results.update({"recall_score":            calculate_score(recall_score, y_test, y_pred)})
+  results.update({"roc_auc_score":           calculate_score(roc_auc_score, y_test, y_pred)})
+  results.update({"training_time": time.strftime("%H:%M:%S", time.gmtime(training_time))})
+  results.update({"test_time": time.strftime("%H:%M:%S", time.gmtime(test_time))})
   print(results)
-  with open(f"./results/automl_{key}.json", "w") as outfile:
+  with open(f"./results/automl_{framework}.json", "w") as outfile:
     json.dump(results, outfile)
 
 def load_csv(dataset_folder, filename):

@@ -4,8 +4,8 @@ echo Script execution started at $(date).
 
 # Preparation
 echo ======== Preparation ========
-rm run.log &> /dev/null
-rm -rf venv-* &> /dev/null
+rm *.log &> /dev/null
+# rm -rf venv-* &> /dev/null
 rm -rf structured* &> /dev/null
 rm -rf Autogluon* &> /dev/null
 rm results/* &> /dev/null
@@ -50,7 +50,7 @@ python3.8 -m pip install --upgrade pip
 python3.8 -m pip install --upgrade setuptools pytictoc wheel evalml
 python3.8 ./automl_evalml.py
 
-FLAML
+# FLAML
 echo ======== FLAML ========
 python3.8 -m venv venv-flaml
 source ./venv-flaml/bin/activate
@@ -95,7 +95,7 @@ echo ======== Plotter ========
 python3.8 -m venv venv-plotter
 source ./venv-plotter/bin/activate
 python3.8 -m pip install --upgrade pip
-python3.8 -m pip install --upgrade setuptools pytictoc wheel matplotlib
+python3.8 -m pip install --upgrade setuptools pytictoc wheel matplotlib pandas tabulate
 python3.8 ./plotter.py
 
 echo Script execution finished at $(date).
