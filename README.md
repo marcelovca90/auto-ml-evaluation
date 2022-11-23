@@ -31,6 +31,7 @@
 		- Copiar o CD montado para a pasta do usuário (`cp -r /media/automl/VBox_GAs_7.0.2 ~/`)
 		- Alterar para a pasta do usuário (`cd ~/VBox_GAs_7.0.2/`)
 		- Executar o instalador com privilégio de administrador (`sudo ./VBoxLinusAdditions.run`)
+		- `reboot`
 
 - Verificar se a "tartaruga verde" não está aparecendo no canto inferior direito da VM
 
