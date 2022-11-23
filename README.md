@@ -20,7 +20,6 @@
 - Criar VM do Ubuntu no VirtualBox
 	- Usuário e senha automl; nome da máquina automl-vbox
 	- Alocar pelo menos 40GB de disco, 8GB de RAM e 2 núcleos de CPU
-	- Instalar VBox Guest Additions já durante o setup
 
 - Verificar se a "tartaruga verde" não está aparecendo no canto inferior direito da VM
 
