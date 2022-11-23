@@ -7,6 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 import json
 import os
 import pandas as pd
+import time
 
 DATASET_FOLDER = 'datasets/iot_23'
 SEED = 42
@@ -42,8 +43,8 @@ def collect_and_persist_results(y_test, y_pred, training_time, test_time, key="u
   results.update({'precision_score': calculate_score(precision_score, y_test, y_pred)})
   results.update({'recall_score': calculate_score(recall_score, y_test, y_pred)})
   results.update({'roc_auc_score': calculate_score(roc_auc_score, y_test, y_pred)})
-  results.update({'training_time': training_time})
-  results.update({'test_time': test_time})
+  results.update({'training_time': time.strftime("%H:%M:%S", time.gmtime(training_time))})
+  results.update({'test_time': time.strftime("%H:%M:%S", time.gmtime(test_time))})
   print(results)
   with open(f"./results/automl_{key}.json", "w") as outfile:
     json.dump(results, outfile)
