@@ -18,7 +18,7 @@
 - Baixar o Ubuntu [22.04.1 LTS](https://releases.ubuntu.com/22.04/ubuntu-22.04.1-desktop-amd64.iso)
 
 - Criar VM do Ubuntu no VirtualBox
-	- Usuário e senha automl; nome da máquina automl-vbox
+	- Usuário e senha automl; nome da máquina automl-VirtualBox
 	- Alocar pelo menos 40GB de disco, 8GB de RAM e 2 núcleos de CPU
 
 - Executar a VM do Ubuntu e proceder com a instalação (desmarcar a opção Unattended installation)
@@ -50,7 +50,7 @@
 	- `wget "https://github.com/GitCredentialManager/git-credential-manager/releases/download/v2.0.696/gcmcore-linux_amd64.2.0.696.deb" -O /tmp/gcmcore.deb`
 	- `sudo dpkg -i /tmp/gcmcore.deb`
 	- `git-credential-manager-core configure`
-	- Adicionar `export GCM_CREDENTIAL_STORE=secretservice` ao final do arquivo ~/.bashrc
+	- Adicionar `export GCM_CREDENTIAL_STORE=secretservice` ao final do arquivo ~/.bashrc (`gedit ~/.bashrc`)
 	- `cd ~/ && mkdir git && cd ~/git/`
 	- `git clone https://github.com/marcelovca90/auto-ml-comparison.git`
 	- `cd auto-ml-comparison`
