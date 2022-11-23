@@ -1,6 +1,13 @@
 #!/bin/bash
 
-echo Script execution started.
+echo Script execution started at $(date).
+
+# Preparation
+echo ======== Preparation ========
+rm run.log &> /dev/null
+rm -rf venv-* &> /dev/null
+rm -rf structured_data_classifier/ &> /dev/null
+rm results/* &> /dev/null
 
 # AutoKeras
 echo ======== AutoKeras ========
@@ -47,7 +54,7 @@ echo ======== TPOT ========
 python3.8 -m venv venv-tpot
 source ./venv-tpot/bin/activate
 python3.8 -m pip install --upgrade pip
-python3.8 -m pip install --upgrade setuptools pytictoc deap update_checker tqdm stopit xgboost tpot
+python3.8 -m pip install --upgrade setuptools pytictoc deap update_checker tqdm stopit xgboost torch tpot
 python3.8 ./automl_tpot.py
 
 # Plotter
@@ -58,4 +65,5 @@ python3.8 -m pip install --upgrade pip
 python3.8 -m pip install --upgrade setuptools pytictoc matplotlib
 python3.8 ./plotter.py
 
-echo Script execution finished.
+echo Script execution finished at $(date).
+

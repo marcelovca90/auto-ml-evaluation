@@ -8,17 +8,20 @@ import json
 import os
 import pandas as pd
 
+DATASET_FOLDER = 'datasets/iot_23'
 SEED = 42
-
 TIMER = TicToc()
 
 def load_openml(dataset_id=44):
-
     X, y = fetch_openml(data_id=dataset_id, return_X_y=True, as_frame=False)
-
     y = LabelEncoder().fit_transform(y)
-
     return train_test_split(X, y, test_size=0.2, random_state=SEED)
+
+def load_csv(dataset_folder, filename):
+    base_folder = os.path.join(os.path.dirname(__file__), dataset_folder)
+    full_filename = os.path.join(base_folder, filename)
+    df = pd.read_csv(filepath_or_buffer=full_filename).infer_objects().to_numpy()
+    return df.ravel() if df.shape[1] == 1 else df
 
 def calculate_score(metric, y_true, y_pred, **kwargs):
 	try:

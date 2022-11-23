@@ -1,24 +1,31 @@
-from common import collect_and_persist_scores, load_openml, SEED, TIMER
+from common import collect_and_persist_scores, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
 from autoPyTorch.api.tabular_classification import TabularClassificationTask
 
-X_train, X_test, y_train, y_test = load_openml()
+try:
 
-clf = TabularClassificationTask()
+    X_train, X_test = load_csv(DATASET_FOLDER, 'X_train.csv'), load_csv(DATASET_FOLDER, 'X_test.csv')
+    y_train, y_test = load_csv(DATASET_FOLDER, 'y_train.csv'), load_csv(DATASET_FOLDER, 'y_test.csv')
 
-TIMER.tic()
-clf.search(
-    X_train=X_train,
-    y_train=y_train,
-    X_test=X_test,
-    y_test=y_test,
-    optimize_metric='accuracy',
-    total_walltime_limit=10*60,
-    func_eval_time_limit_secs=60
-)
-TIMER.toc()
+    clf = TabularClassificationTask(seed=SEED)
 
-TIMER.tic()
-y_pred = clf.predict(X_test)
-TIMER.toc()
+    TIMER.tic()
+    clf.search(
+        X_train=X_train,
+        y_train=y_train,
+        X_test=X_test,
+        y_test=y_test,
+        optimize_metric='accuracy',
+        total_walltime_limit=60*60,
+        func_eval_time_limit_secs=3*60,
+        memory_limit=8192
+    )
+    TIMER.toc()
 
-collect_and_persist_scores(y_test, y_pred, "autopytorch")
+    TIMER.tic()
+    y_pred = clf.predict(X_test)
+    TIMER.toc()
+
+    collect_and_persist_scores(y_test, y_pred, "autopytorch")
+
+except Exception as e:
+    print(f'Cannot run autopytorch for dataset {DATASET_FOLDER}. Reason: {str(e)}')

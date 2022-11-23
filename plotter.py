@@ -2,7 +2,8 @@ import json
 import matplotlib.pyplot as plt
 import os
 
-# plot the best result for each classifier
+metric = 'f1_score_weighted'
+
 plt.figure(figsize=(32,24))
 plt.rcParams['font.size'] = '16'
 
@@ -12,10 +13,11 @@ for filename in os.listdir("./results"):
         with open(f'results/{filename}') as file:
             content = json.load(file)
             x = filename.replace('automl_', '').replace('.json', '')
-            y = content['roc_auc_score']
+            y = content[metric]
             plt.bar(x, y)
             plt.text(x, y+0.01,f'{100*y:.2f}%')
     idx += 1
 
-plt.title('Results')
+plt.title(f'Results ({metric})')
 plt.savefig(f'./results/automl.png')
+
