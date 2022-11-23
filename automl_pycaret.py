@@ -6,11 +6,10 @@ import pandas as pd
 try:
 
     X_train, X_test, y_train, y_test = load_openml(44)
+    train_df = pd.DataFrame(X_train).assign(**{'class': pd.Series(y_train)})
+    test_df = pd.DataFrame(X_test).assign(**{'class': pd.Series(y_test)})
 
-    data_train = pd.DataFrame(X_train)
-    data_train['class'] = pd.Series(y_train)
-
-    setup(data_train, target='class', silent=True)
+    setup(train_df, target='class', silent=True)
 
     TIMER.tic()
     best = compare_models(budget_time=1, cross_validation=True, fold=5, sort="Accuracy")
@@ -20,7 +19,7 @@ try:
     data_test['class'] = pd.Series(y_test)
 
     TIMER.tic()
-    y_pred_df = predict_model(best, data_test, raw_score=True)
+    y_pred_df = predict_model(best, test_df, raw_score=True)
     y_pred = [np.argmax(i) for i in y_pred_df[["Score_0", "Score_1"]].to_numpy()]
     TIMER.toc()
 
