@@ -21,6 +21,17 @@
 	- Usuário e senha automl; nome da máquina automl-vbox
 	- Alocar pelo menos 40GB de disco, 8GB de RAM e 2 núcleos de CPU
 
+- Executar a VM do Ubuntu e proceder com a instalação (desmarcar a opção Unattended installation)
+
+- Assim que o Ubuntu estiver instalado, abrir o terminal e digitar:
+	- sudo apt-get update
+	- sudo apt-get install gcc make perl
+	- Instalar VBox Guest Additions
+		- Clicar em "Dispositivos" > Inserir imagem para convidados
+		- Copiar o CD montado para a pasta do usuário (`cp -r /media/automl/VBox_GAs_7.0.2 ~/`)
+		- Alterar para a pasta do usuário (`cd ~/VBox_GAs_7.0.2/`)
+		- Executar o instalador com privilégio de administrador (`sudo ./VBoxLinusAdditions.run`)
+
 - Verificar se a "tartaruga verde" não está aparecendo no canto inferior direito da VM
 
 - Verificar se a instrução AVX está na lista de instruções suportadas pelo CPU
