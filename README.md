@@ -1,7 +1,8 @@
 # auto-ml-comparison
 
+- Baixar o [Oracle VM VirtualBox](https://download.virtualbox.org/virtualbox/7.0.4/VirtualBox-7.0.4-154605-Win.exe)
 
-  
+- Baixar o Ubuntu [22.04.1 LTS](https://releases.ubuntu.com/22.04/ubuntu-22.04.1-desktop-amd64.iso)
 
 - Abrir Prompt de Comando como Administrador
 	- bcdedit /set hypervisorlaunchtype off
@@ -14,10 +15,10 @@
 
 - Reiniciar o computador
 
-- Criar VM do Ubuntu (22.04.1 LTS) no VirtualBox
-	- (usuário e senha automl; nome da máquina automl-vbox)
-	- (alocar pelo menos 40GB de disco, 8GB de RAM e 2 núcleos de CPU)
-	- (instalar VBox Guest Additions já durante o setup)
+- Criar VM do Ubuntu no VirtualBox
+	- Usuário e senha automl; nome da máquina automl-vbox
+	- Alocar pelo menos 40GB de disco, 8GB de RAM e 2 núcleos de CPU
+	- Instalar VBox Guest Additions já durante o setup
 
 - Verificar se a "tartaruga verde" não está aparecendo no canto inferior direito da VM
 
