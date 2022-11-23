@@ -20,7 +20,7 @@ try:
     y_pred = (clf.predict(test_df).data[:, 0] > 0.5).astype(int)
     TIMER.toc()
 
-    collect_and_persist_scores(y_test, y_pred, "autolightml")
+    collect_and_persist_scores(y_test, y_pred, "lightautoml")
 
 except Exception as e:
-    print(f'Cannot run autolightml for dataset {DATASET_FOLDER}. Reason: {str(e)}')
+    print(f'Cannot run lightautoml for dataset {DATASET_FOLDER}. Reason: {str(e)}')
