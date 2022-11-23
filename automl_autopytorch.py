@@ -1,4 +1,4 @@
-from common import collect_and_persist_scores, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
+from common import collect_and_persist_results, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
 from autoPyTorch.api.tabular_classification import TabularClassificationTask
 
 try:
@@ -18,13 +18,13 @@ try:
         func_eval_time_limit_secs=1*60,
         memory_limit=8192
     )
-    TIMER.toc()
+    training_time = TIMER.tocvalue()
 
     TIMER.tic()
     y_pred = clf.predict(X_test)
-    TIMER.toc()
+    test_time = TIMER.tocvalue()
 
-    collect_and_persist_scores(y_test, y_pred, "autopytorch")
+    collect_and_persist_results(y_test, y_pred, training_time, test_time, "autopytorch")
 
 except Exception as e:
     print(f'Cannot run autopytorch for dataset {DATASET_FOLDER}. Reason: {str(e)}')

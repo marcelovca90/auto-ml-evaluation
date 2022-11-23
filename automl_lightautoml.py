@@ -1,4 +1,4 @@
-from common import collect_and_persist_scores, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
+from common import collect_and_persist_results, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
 from lightautoml.automl.presets.tabular_presets import TabularAutoML
 from lightautoml.tasks import Task
 import pandas as pd
@@ -13,14 +13,14 @@ try:
 
     TIMER.tic()
     clf.fit_predict(train_df, roles={'target': 'class'})
-    TIMER.toc()
+    training_time = TIMER.tocvalue()
 
     TIMER.tic()
     y_test = test_df['class'].values
     y_pred = (clf.predict(test_df).data[:, 0] > 0.5).astype(int)
-    TIMER.toc()
+    test_time = TIMER.tocvalue()
 
-    collect_and_persist_scores(y_test, y_pred, "lightautoml")
+    collect_and_persist_results(y_test, y_pred, training_time, test_time, "lightautoml")
 
 except Exception as e:
     print(f'Cannot run lightautoml for dataset {DATASET_FOLDER}. Reason: {str(e)}')

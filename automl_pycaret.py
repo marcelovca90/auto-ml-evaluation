@@ -1,5 +1,5 @@
 
-from common import collect_and_persist_scores, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
+from common import collect_and_persist_results, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
 from pycaret.classification import *
 import pandas as pd
 
@@ -13,7 +13,7 @@ try:
 
     TIMER.tic()
     best = compare_models(budget_time=1, cross_validation=True, fold=5, sort="Accuracy")
-    TIMER.toc()
+    training_time = TIMER.tocvalue()
 
     data_test = pd.DataFrame(X_test)
     data_test['class'] = pd.Series(y_test)
@@ -22,9 +22,9 @@ try:
     y_test = test_df['class'].values
     y_pred_df = predict_model(best, test_df, raw_score=True)
     y_pred = [np.argmax(i) for i in y_pred_df[["Score_0", "Score_1"]].to_numpy()]
-    TIMER.toc()
+    test_time = TIMER.tocvalue()
 
-    collect_and_persist_scores(y_test, y_pred, "pycaret")
+    collect_and_persist_results(y_test, y_pred, training_time, test_time, "pycaret")
 
 except Exception as e:
     print(f'Cannot run pycaret for dataset {DATASET_FOLDER}. Reason: {str(e)}')

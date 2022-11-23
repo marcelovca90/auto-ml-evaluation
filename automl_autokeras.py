@@ -1,4 +1,4 @@
-from common import collect_and_persist_scores, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
+from common import collect_and_persist_results, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
 import autokeras as ak
 
 try:
@@ -9,13 +9,13 @@ try:
 
     TIMER.tic()
     autokeras.fit(X_train, y_train, epochs=100)
-    TIMER.toc()
+    training_time = TIMER.tocvalue()
 
     TIMER.tic()
     y_pred = autokeras.predict(X_test)
-    TIMER.toc()
+    test_time = TIMER.tocvalue()
 
-    collect_and_persist_scores(y_test, y_pred, "autokeras")
+    collect_and_persist_results(y_test, y_pred, training_time, test_time, "autokeras")
 
 except Exception as e:
     print(f'Cannot run autokeras for dataset {DATASET_FOLDER}. Reason: {str(e)}')
