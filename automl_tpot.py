@@ -3,8 +3,7 @@ from tpot import TPOTClassifier
 
 try:
 
-    X_train, X_test = load_csv(DATASET_FOLDER, 'X_train.csv'), load_csv(DATASET_FOLDER, 'X_test.csv')
-    y_train, y_test = load_csv(DATASET_FOLDER, 'y_train.csv'), load_csv(DATASET_FOLDER, 'y_test.csv')
+    X_train, X_test, y_train, y_test = load_openml(44)
 
     clf = TPOTClassifier(max_time_mins=1, cv=5, random_state=SEED)
 
