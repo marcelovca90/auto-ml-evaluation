@@ -53,8 +53,9 @@
 	- `sudo dpkg -i /tmp/gcmcore.deb`
 	- `git-credential-manager-core configure`
 	- Adicionar `export GCM_CREDENTIAL_STORE=secretservice` ao final do arquivo ~/.bashrc (`gedit ~/.bashrc`)
+		- Se der problema mais para frente, executar `export GCM_CREDENTIAL_STORE=cache` no próprio terminal.
 	- `cd ~/ && mkdir git && cd ~/git/`
 	- `git clone https://github.com/marcelovca90/auto-ml-comparison.git`
 	- `cd auto-ml-comparison`
 	- `chmod +x run.sh`
-	- `./run.sh`
+	- `./run.sh | tee run.log`
