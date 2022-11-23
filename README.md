@@ -21,7 +21,7 @@
 	- Usuário e senha automl; nome da máquina automl-VirtualBox
 	- Alocar pelo menos 40GB de disco, 8GB de RAM e 2 núcleos de CPU
 
-- Executar a VM do Ubuntu e proceder com a instalação (desmarcar a opção Unattended installation)
+- Executar a VM do Ubuntu e proceder com a instalação (marcar a opção `Skip Unattended Installation`)
 
 - Assim que o Ubuntu estiver instalado:
 	- Verificar se a "tartaruga verde" não está aparecendo no canto inferior direito da VM
