@@ -41,6 +41,7 @@
 	- `sudo dpkg -i /tmp/gcmcore.deb`
 	- `git-credential-manager-core configure`
 	- Adicionar `export GCM_CREDENTIAL_STORE=secretservice` ao final do arquivo ~/.bashrc
+	- `cd ~/ && mkdir git && cd ~/git/`
 	- `git clone https://github.com/marcelovca90/auto-ml-comparison.git`
 	- `cd auto-ml-comparison`
 	- `chmod +x run.sh`
