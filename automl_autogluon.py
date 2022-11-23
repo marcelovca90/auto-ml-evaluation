@@ -6,8 +6,8 @@ import pandas as pd
 try:
 
     X_train, X_test, y_train, y_test = load_openml(44)
-    train_df = pd.DataFrame(X_train).assign(**{'class': pd.Series(y_train)})
-    test_df = pd.DataFrame(X_test).assign(**{'class': pd.Series(y_test)})
+    train_df = pd.DataFrame(X_train).assign(**{'class': pd.Series(y_train)}).dropna()
+    test_df = pd.DataFrame(X_test).assign(**{'class': pd.Series(y_test)}).dropna()
 
     clf = TabularPredictor(eval_metric='accuracy', label='class')
 
@@ -16,6 +16,7 @@ try:
     TIMER.toc()
 
     TIMER.tic()
+    y_test = test_df['class'].values
     y_pred = clf.predict(test_df)
     TIMER.toc()
 
