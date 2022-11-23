@@ -25,19 +25,17 @@
 
 - Assim que o Ubuntu estiver instalado:
 	- Verificar se a "tartaruga verde" não está aparecendo no canto inferior direito da VM
+	- - Verificar se a instrução AVX está na lista de instruções suportadas pelo CPU
+		- `more /proc/- cpuinfo | grep flags | grep avx`
 	- Abrir o terminal e digitar:
-	- sudo apt-get update
-	- sudo apt-get install gcc make perl
+		- `sudo apt-get update -y`
+		- `sudo apt-get install gcc make perl -y`
 	- Instalar VBox Guest Additions
 		- Clicar em "Dispositivos" > Inserir imagem para convidados
 		- Copiar o CD montado para a pasta do usuário (`cp -r /media/automl/VBox_GAs_7.0.2 ~/`)
 		- Alterar para a pasta do usuário (`cd ~/VBox_GAs_7.0.2/`)
 		- Executar o instalador com privilégio de administrador (`sudo ./VBoxLinusAdditions.run`)
 		- `reboot`
-
-
-- Verificar se a instrução AVX está na lista de instruções suportadas pelo CPU
-	- `more /proc/- cpuinfo | grep flags | grep avx`
 	
 - Executar os seguintes comandos no Terminal:
 	- `sudo add-apt-repository ppa:deadsnakes/ppa -y`
