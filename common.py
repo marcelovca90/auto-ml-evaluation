@@ -13,7 +13,7 @@ SEED = 42
 TIMER = TicToc()
 
 def load_openml(dataset_id=44):
-    X, y = fetch_openml(data_id=dataset_id, return_X_y=True, as_frame=False)
+    X, y = fetch_openml(data_id=dataset_id, return_X_y=True)
     y = LabelEncoder().fit_transform(y)
     return train_test_split(X, y, test_size=0.2, random_state=SEED)
 
