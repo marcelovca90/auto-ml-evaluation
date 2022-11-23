@@ -6,7 +6,8 @@ echo Script execution started at $(date).
 echo ======== Preparation ========
 rm run.log &> /dev/null
 rm -rf venv-* &> /dev/null
-rm -rf structured_data_classifier/ &> /dev/null
+rm -rf structured* &> /dev/null
+rm -rf Autogluon* &> /dev/null
 rm results/* &> /dev/null
 
 # AutoGluon
