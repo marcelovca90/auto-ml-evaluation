@@ -42,7 +42,15 @@ python3.8 -m pip install --upgrade pip
 python3.8 -m pip install --upgrade setuptools pytictoc wheel auto-sklearn
 python3.8 ./automl_autosklearn.py
 
-# FLAML
+# EvalML
+echo ======== EvalML ========
+python3.8 -m venv venv-evalml
+source ./venv-evalml/bin/activate
+python3.8 -m pip install --upgrade pip
+python3.8 -m pip install --upgrade setuptools pytictoc wheel evalml
+python3.8 ./automl_evalml.py
+
+FLAML
 echo ======== FLAML ========
 python3.8 -m venv venv-flaml
 source ./venv-flaml/bin/activate
@@ -81,6 +89,7 @@ source ./venv-tpot/bin/activate
 python3.8 -m pip install --upgrade pip
 python3.8 -m pip install --upgrade setuptools pytictoc wheel deap update_checker tqdm stopit xgboost torch tpot
 python3.8 ./automl_tpot.py
+
 # Plotter
 echo ======== Plotter ========
 python3.8 -m venv venv-plotter
