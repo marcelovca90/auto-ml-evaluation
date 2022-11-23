@@ -23,7 +23,9 @@
 
 - Executar a VM do Ubuntu e proceder com a instalação (desmarcar a opção Unattended installation)
 
-- Assim que o Ubuntu estiver instalado, abrir o terminal e digitar:
+- Assim que o Ubuntu estiver instalado:
+	- Verificar se a "tartaruga verde" não está aparecendo no canto inferior direito da VM
+	- Abrir o terminal e digitar:
 	- sudo apt-get update
 	- sudo apt-get install gcc make perl
 	- Instalar VBox Guest Additions
@@ -33,7 +35,6 @@
 		- Executar o instalador com privilégio de administrador (`sudo ./VBoxLinusAdditions.run`)
 		- `reboot`
 
-- Verificar se a "tartaruga verde" não está aparecendo no canto inferior direito da VM
 
 - Verificar se a instrução AVX está na lista de instruções suportadas pelo CPU
 	- `more /proc/- cpuinfo | grep flags | grep avx`
