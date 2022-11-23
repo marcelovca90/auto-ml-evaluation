@@ -3,13 +3,12 @@ from flaml import AutoML
 
 try:
 
-    X_train, X_test = load_csv(DATASET_FOLDER, 'X_train.csv'), load_csv(DATASET_FOLDER, 'X_test.csv')
-    y_train, y_test = load_csv(DATASET_FOLDER, 'y_train.csv'), load_csv(DATASET_FOLDER, 'y_test.csv')
+    X_train, X_test, y_train, y_test = load_openml(44)
 
     clf = AutoML()
 
     TIMER.tic()
-    clf.fit(X_train, y_train, metric="accuracy", task="classification", time_budget=60*60)
+    clf.fit(X_train, y_train, metric="accuracy", task="classification", time_budget=1*60)
     TIMER.toc()
 
     TIMER.tic()

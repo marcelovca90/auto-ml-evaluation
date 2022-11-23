@@ -6,7 +6,7 @@ try:
     X_train, X_test = load_csv(DATASET_FOLDER, 'X_train.csv'), load_csv(DATASET_FOLDER, 'X_test.csv')
     y_train, y_test = load_csv(DATASET_FOLDER, 'y_train.csv'), load_csv(DATASET_FOLDER, 'y_test.csv')
 
-    clf = TPOTClassifier(max_time_mins=60, cv=5, random_state=SEED)
+    clf = TPOTClassifier(max_time_mins=1, cv=5, random_state=SEED)
 
     TIMER.tic()
     clf.fit(X_train, y_train)

@@ -3,10 +3,9 @@ from autosklearn.classification import AutoSklearnClassifier
 
 try:
 
-    X_train, X_test = load_csv(DATASET_FOLDER, 'X_train.csv'), load_csv(DATASET_FOLDER, 'X_test.csv')
-    y_train, y_test = load_csv(DATASET_FOLDER, 'y_train.csv'), load_csv(DATASET_FOLDER, 'y_test.csv')
+    X_train, X_test, y_train, y_test = load_openml(44)
 
-    clf = AutoSklearnClassifier(time_left_for_this_task=60*60, resampling_strategy="cv", resampling_strategy_arguments={"folds": 5}, seed=SEED)
+    clf = AutoSklearnClassifier(time_left_for_this_task=1*60, resampling_strategy="cv", resampling_strategy_arguments={"folds": 5}, seed=SEED)
 
     TIMER.tic()
     clf.fit(X_train, y_train)
