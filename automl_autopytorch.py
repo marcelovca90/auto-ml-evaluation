@@ -1,7 +1,6 @@
 from autoPyTorch.api.tabular_classification import TabularClassificationTask
 
-from common import (DATASET_REFERENCE, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
-                    TIMER, collect_and_persist_results, load_data_delegate)
+from common import *
 
 try:
 
@@ -29,4 +28,4 @@ try:
     collect_and_persist_results(y_test, y_pred, training_time, test_time, "autopytorch")
 
 except Exception as e:
-    print(f'Cannot run autopytorch for dataset {DATASET_REFERENCE}. Reason: {str(e)}')
+    print(f'Cannot run autopytorch for dataset {DATASET_REF}. Reason: {str(e)}')

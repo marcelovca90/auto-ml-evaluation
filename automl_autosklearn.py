@@ -1,7 +1,6 @@
 from autosklearn.classification import AutoSklearnClassifier
 
-from common import (DATASET_REFERENCE, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
-                    TIMER, collect_and_persist_results, load_data_delegate)
+from common import *
 
 try:
 
@@ -20,4 +19,4 @@ try:
     collect_and_persist_results(y_test, y_pred, training_time, test_time, "autosklearn")
 
 except Exception as e:
-    print(f'Cannot run autosklearn for dataset {DATASET_REFERENCE}. Reason: {str(e)}')
+    print(f'Cannot run autosklearn for dataset {DATASET_REF}. Reason: {str(e)}')

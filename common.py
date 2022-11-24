@@ -8,23 +8,34 @@ from sklearn.datasets import fetch_openml
 from sklearn.metrics import *
 from sklearn.model_selection import train_test_split
 
-# for reference, binary = 44 (spambase), multiclass = 61 (iris)
-DATASET_REFERENCE = 44 
+# for reference:
+# - binary = 37 (diabetes) or 44 (spambase)
+# - multiclass = 61 (iris) or 32 (pendigits)
+DATASET_REF = 37
 EXEC_TIME_MINUTES = 1
 EXEC_TIME_SECONDS = EXEC_TIME_MINUTES*60
 SEED = 42
-TASK_TYPE = 'multiclass' if DATASET_REFERENCE in ['datasets/iot_23', 'datasets/mqtt_iot_ids2020'] else 'binary'
 TIMER = TicToc()
 
+def infer_task_type(y_test):
+    num_classes = len(set(y_test))
+    if num_classes == 1:
+        raise Exception('Malformed data set; num_classes = 1')
+    elif num_classes == 2:
+        task_type = 'binary'
+    else:
+        task_type = 'multiclass'
+    return task_type
+
 def load_data_delegate():
-    if isinstance(DATASET_REFERENCE, int):
+    if isinstance(DATASET_REF, int):
         return load_openml()
-    elif isinstance(DATASET_REFERENCE, str):
+    elif isinstance(DATASET_REF, str):
         return load_csv()
     else:
         raise Exception('DATASET_REFERENCE must be int (OpenML) or str (local CSV)')
 
-def load_csv(dataset_folder=DATASET_REFERENCE):
+def load_csv(dataset_folder=DATASET_REF):
     base_folder = os.path.join(os.path.dirname(__file__), dataset_folder)
     filenames = ['X_train.csv', 'y_train.csv', 'X_test.csv', 'y_test.csv']
     dfs = []
@@ -34,7 +45,7 @@ def load_csv(dataset_folder=DATASET_REFERENCE):
     parsed_dfs = [df.ravel() for df in dfs if df.shape[1]]
     return parsed_dfs
 
-def load_openml(dataset_id=DATASET_REFERENCE):
+def load_openml(dataset_id=DATASET_REF):
     dataset = fetch_openml(data_id=dataset_id, return_X_y=False)
     X, y = dataset.data, pd.Series(pd.factorize(dataset.target)[0])
     #y = LabelEncoder().fit_transform(y)

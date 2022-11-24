@@ -1,13 +1,12 @@
 from evalml.automl import AutoMLSearch
 
-from common import (DATASET_REFERENCE, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
-                    TASK_TYPE, TIMER, collect_and_persist_results, load_data_delegate)
+from common import *
 
 try:
 
     X_train, X_test, y_train, y_test = load_data_delegate()
 
-    clf = AutoMLSearch(X_train=X_train, y_train=y_train, problem_type=TASK_TYPE, random_seed=SEED, max_time=EXEC_TIME_SECONDS)
+    clf = AutoMLSearch(X_train=X_train, y_train=y_train, problem_type=infer_task_type(y_test), random_seed=SEED, max_time=EXEC_TIME_SECONDS)
 
     TIMER.tic()
     clf.search()
@@ -21,4 +20,4 @@ try:
     collect_and_persist_results(y_test, y_pred, training_time, test_time, "evalml")
 
 except Exception as e:
-    print(f'Cannot run evalml for dataset {DATASET_REFERENCE}. Reason: {str(e)}')
+    print(f'Cannot run evalml for dataset {DATASET_REF}. Reason: {str(e)}')
