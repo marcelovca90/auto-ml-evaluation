@@ -37,18 +37,17 @@ def load_data_delegate():
 
 def load_csv(dataset_folder=DATASET_REF):
     base_folder = os.path.join(os.path.dirname(__file__), dataset_folder)
-    filenames = ['X_train.csv', 'y_train.csv', 'X_test.csv', 'y_test.csv']
+    filenames = ['X_train.csv', 'X_test.csv', 'y_train.csv', 'y_test.csv']
     dfs = []
     for filename in filenames:
         full_filename = os.path.join(base_folder, filename)
-        dfs.append(pd.read_csv(filepath_or_buffer=full_filename).infer_objects().to_numpy())
-    parsed_dfs = [df.ravel() for df in dfs if df.shape[1]]
-    return parsed_dfs
+        csv = pd.read_csv(filepath_or_buffer=full_filename).infer_objects().to_numpy()
+        dfs.append(csv.ravel() if csv.shape[1] == 1 else csv)
+    return dfs[0], dfs[1], dfs[2], dfs[3]
 
 def load_openml(dataset_id=DATASET_REF):
     dataset = fetch_openml(data_id=dataset_id, return_X_y=False)
     X, y = dataset.data, pd.Series(pd.factorize(dataset.target)[0])
-    #y = LabelEncoder().fit_transform(y)
     return train_test_split(X, y, test_size=0.2, random_state=SEED)
 
 def calculate_score(metric, y_true, y_pred, **kwargs):
@@ -75,8 +74,3 @@ def collect_and_persist_results(y_test, y_pred, training_time, test_time, framew
   print(results)
   with open(f"./results/automl_{framework}.json", "w") as outfile:
     json.dump(results, outfile)
-
-def load_csv(dataset_folder, filename):
-    full_filename = os.path.join(dataset_folder, filename)
-    df = pd.read_csv(filepath_or_buffer=full_filename).infer_objects().to_numpy()
-    return df.ravel() if df.shape[1] == 1 else df
