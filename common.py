@@ -1,33 +1,43 @@
+import json
+import os
+import time
+
+import pandas as pd
 from pytictoc import TicToc
 from sklearn.datasets import fetch_openml
 from sklearn.metrics import *
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
 
-import json
-import os
-import pandas as pd
-import time
-
-DATASET_FOLDER = 'datasets/iot_23'
+# for reference, binary = 44 (spambase), multiclass = 61 (iris)
+DATASET_REFERENCE = 44 
 EXEC_TIME_MINUTES = 1
 EXEC_TIME_SECONDS = EXEC_TIME_MINUTES*60
 SEED = 42
-TASK_TYPE = 'multiclass' if DATASET_FOLDER in ['datasets/iot_23', 'datasets/mqtt_iot_ids2020'] else 'binary'
+TASK_TYPE = 'multiclass' if DATASET_REFERENCE in ['datasets/iot_23', 'datasets/mqtt_iot_ids2020'] else 'binary'
 TIMER = TicToc()
 
 def load_data_delegate():
-    return load_openml(44)
+    if isinstance(DATASET_REFERENCE, int):
+        return load_openml()
+    elif isinstance(DATASET_REFERENCE, str):
+        return load_csv()
+    else:
+        raise Exception('DATASET_REFERENCE must be int (OpenML) or str (local CSV)')
 
-def load_csv(dataset_folder, filename):
+def load_csv(dataset_folder=DATASET_REFERENCE):
     base_folder = os.path.join(os.path.dirname(__file__), dataset_folder)
-    full_filename = os.path.join(base_folder, filename)
-    df = pd.read_csv(filepath_or_buffer=full_filename).infer_objects().to_numpy()
-    return df.ravel() if df.shape[1] == 1 else df
+    filenames = ['X_train.csv', 'y_train.csv', 'X_test.csv', 'y_test.csv']
+    dfs = []
+    for filename in filenames:
+        full_filename = os.path.join(base_folder, filename)
+        dfs.append(pd.read_csv(filepath_or_buffer=full_filename).infer_objects().to_numpy())
+    parsed_dfs = [df.ravel() for df in dfs if df.shape[1]]
+    return parsed_dfs
 
-def load_openml(dataset_id):
-    X, y = fetch_openml(data_id=dataset_id, return_X_y=True)
-    y = LabelEncoder().fit_transform(y)
+def load_openml(dataset_id=DATASET_REFERENCE):
+    dataset = fetch_openml(data_id=dataset_id, return_X_y=False)
+    X, y = dataset.data, pd.Series(pd.factorize(dataset.target)[0])
+    #y = LabelEncoder().fit_transform(y)
     return train_test_split(X, y, test_size=0.2, random_state=SEED)
 
 def calculate_score(metric, y_true, y_pred, **kwargs):

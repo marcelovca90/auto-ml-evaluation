@@ -3,8 +3,9 @@ import pandas as pd
 from lightautoml.automl.presets.tabular_presets import TabularAutoML
 from lightautoml.tasks import Task
 
-from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
-                    TASK_TYPE, TIMER, collect_and_persist_results, load_data_delegate)
+from common import (DATASET_REFERENCE, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS,
+                    SEED, TASK_TYPE, TIMER, collect_and_persist_results,
+                    load_data_delegate)
 
 try:
 
@@ -19,11 +20,11 @@ try:
     training_time = TIMER.tocvalue()
 
     TIMER.tic()
-    y_test = test_df['class'].values
-    y_pred = np.argmax(clf.predict(test_df), axis=1)
+    y_test = test_df['class']
+    y_pred = np.argmax(clf.predict(test_df).data, axis=1)
     test_time = TIMER.tocvalue()
 
     collect_and_persist_results(y_test, y_pred, training_time, test_time, "lightautoml")
 
 except Exception as e:
-    print(f'Cannot run lightautoml for dataset {DATASET_FOLDER}. Reason: {str(e)}')
+    print(f'Cannot run lightautoml for dataset {DATASET_REFERENCE}. Reason: {str(e)}')

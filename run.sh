@@ -5,7 +5,7 @@ echo Script execution started at $(date).
 # Preparation
 echo ======== Preparation ========
 rm *.log &> /dev/null
-# rm -rf venv-* &> /dev/null
+rm -rf venv-* &> /dev/null
 rm -rf structured* &> /dev/null
 rm -rf Autogluon* &> /dev/null
 rm results/* &> /dev/null
@@ -58,6 +58,14 @@ python3.8 -m pip install --upgrade pip
 python3.8 -m pip install --upgrade setuptools pytictoc wheel flaml
 python3.8 ./automl_flaml.py
 
+# GAMA
+echo ======== GAMA ========
+python3.8 -m venv venv-gama
+source ./venv-gama/bin/activate
+python3.8 -m pip install --upgrade pip
+python3.8 -m pip install --upgrade setuptools pytictoc wheel gama
+python3.8 ./automl_gama.py
+
 # H2O
 echo ======== H2O ========
 python3.8 -m venv venv-h2o
@@ -73,14 +81,6 @@ source ./venv-lightautoml/bin/activate
 python3.8 -m pip install --upgrade pip
 python3.8 -m pip install --upgrade setuptools pytictoc wheel lightautoml
 python3.8 ./automl_lightautoml.py
-
-# PyCaret
-echo ======== PyCaret ========
-python3.8 -m venv venv-pycaret
-source ./venv-pycaret/bin/activate
-python3.8 -m pip install --upgrade pip
-python3.8 -m pip install --upgrade setuptools pytictoc wheel pycaret
-python3.8 ./automl_pycaret.py
 
 # TPOT
 echo ======== TPOT ========
