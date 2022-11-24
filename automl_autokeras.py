@@ -1,11 +1,13 @@
-from common import collect_and_persist_results, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
 import autokeras as ak
+
+from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
+                    TIMER, collect_and_persist_results, load_csv, load_openml)
 
 try:
 
     X_train, X_test, y_train, y_test = load_openml(44)
 
-    autokeras = ak.StructuredDataClassifier(max_trials=1, overwrite=True, seed=SEED)
+    autokeras = ak.StructuredDataClassifier(max_trials=10, overwrite=True, seed=SEED)
 
     TIMER.tic()
     autokeras.fit(X_train, y_train, epochs=100)

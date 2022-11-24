@@ -1,5 +1,7 @@
-from common import collect_and_persist_results, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
 from flaml import AutoML
+
+from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
+                    TIMER, collect_and_persist_results, load_csv, load_openml)
 
 try:
 
@@ -8,7 +10,7 @@ try:
     clf = AutoML()
 
     TIMER.tic()
-    clf.fit(X_train, y_train, metric="accuracy", task="classification", time_budget=1*60)
+    clf.fit(X_train, y_train, metric="accuracy", task="classification", time_budget=EXEC_TIME_SECONDS)
     training_time = TIMER.tocvalue()
 
     TIMER.tic()

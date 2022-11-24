@@ -10,6 +10,8 @@ import pandas as pd
 import time
 
 DATASET_FOLDER = 'datasets/iot_23'
+EXEC_TIME_MINUTES = 5
+EXEC_TIME_SECONDS = EXEC_TIME_MINUTES*60
 SEED = 42
 TIMER = TicToc()
 

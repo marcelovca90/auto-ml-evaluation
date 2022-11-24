@@ -1,7 +1,8 @@
-
-from common import collect_and_persist_results, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
-from pycaret.classification import *
 import pandas as pd
+from pycaret.classification import *
+
+from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
+                    TIMER, collect_and_persist_results, load_csv, load_openml)
 
 try:
 
@@ -12,7 +13,7 @@ try:
     setup(train_df, target='class', silent=True)
 
     TIMER.tic()
-    best = compare_models(budget_time=1, cross_validation=True, fold=5, sort="Accuracy")
+    best = compare_models(budget_time=EXEC_TIME_MINUTES, cross_validation=True, fold=5, sort="Accuracy")
     training_time = TIMER.tocvalue()
 
     data_test = pd.DataFrame(X_test)

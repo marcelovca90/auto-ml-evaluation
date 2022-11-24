@@ -1,7 +1,9 @@
-from common import collect_and_persist_results, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
+import pandas as pd
 from lightautoml.automl.presets.tabular_presets import TabularAutoML
 from lightautoml.tasks import Task
-import pandas as pd
+
+from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
+                    TIMER, collect_and_persist_results, load_csv, load_openml)
 
 try:
 
@@ -9,7 +11,7 @@ try:
     train_df = pd.DataFrame(X_train).assign(**{'class': pd.Series(y_train)}).dropna()
     test_df = pd.DataFrame(X_test).assign(**{'class': pd.Series(y_test)}).dropna()
 
-    clf = TabularAutoML(task=Task('binary', metric='accuracy'), timeout=1*60)
+    clf = TabularAutoML(task=Task('binary', metric='accuracy'), timeout=EXEC_TIME_SECONDS)
 
     TIMER.tic()
     clf.fit_predict(train_df, roles={'target': 'class'})

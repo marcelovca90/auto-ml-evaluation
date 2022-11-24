@@ -1,7 +1,8 @@
-
-from common import collect_and_persist_results, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
-from autogluon.tabular import TabularDataset, TabularPredictor
 import pandas as pd
+from autogluon.tabular import TabularDataset, TabularPredictor
+
+from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
+                    TIMER, collect_and_persist_results, load_csv, load_openml)
 
 try:
 
@@ -12,7 +13,7 @@ try:
     clf = TabularPredictor(eval_metric='accuracy', label='class')
 
     TIMER.tic()
-    clf = clf.fit(time_limit=1*60, train_data=train_df)
+    clf = clf.fit(time_limit=EXEC_TIME_SECONDS, train_data=train_df)
     training_time = TIMER.tocvalue()
 
     TIMER.tic()

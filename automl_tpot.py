@@ -1,11 +1,13 @@
-from common import collect_and_persist_results, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
 from tpot import TPOTClassifier
+
+from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
+                    TIMER, collect_and_persist_results, load_csv, load_openml)
 
 try:
 
     X_train, X_test, y_train, y_test = load_openml(44)
 
-    clf = TPOTClassifier(max_time_mins=1, cv=5, random_state=SEED)
+    clf = TPOTClassifier(max_time_mins=EXEC_TIME_MINUTES, cv=5, random_state=SEED)
 
     TIMER.tic()
     clf.fit(X_train, y_train)

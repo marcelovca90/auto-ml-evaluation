@@ -1,11 +1,13 @@
-from common import collect_and_persist_results, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
 from h2o.sklearn import H2OAutoMLClassifier
+
+from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
+                    TIMER, collect_and_persist_results, load_csv, load_openml)
 
 try:
 
     X_train, X_test, y_train, y_test = load_openml(44)
 
-    clf = H2OAutoMLClassifier(max_runtime_secs=1*60, nfolds=5, seed=SEED, sort_metric='accuracy')
+    clf = H2OAutoMLClassifier(max_runtime_secs=EXEC_TIME_SECONDS, nfolds=5, seed=SEED, sort_metric='accuracy')
 
     TIMER.tic()
     clf.fit(X_train, y_train)

@@ -1,5 +1,7 @@
-from common import collect_and_persist_results, load_csv, load_openml, DATASET_FOLDER, SEED, TIMER
 from autoPyTorch.api.tabular_classification import TabularClassificationTask
+
+from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
+                    TIMER, collect_and_persist_results, load_csv, load_openml)
 
 try:
 
@@ -14,8 +16,8 @@ try:
         X_test=X_test,
         y_test=y_test,
         optimize_metric='accuracy',
-        total_walltime_limit=1*60,
-        func_eval_time_limit_secs=1*60,
+        total_walltime_limit=EXEC_TIME_SECONDS,
+        func_eval_time_limit_secs=EXEC_TIME_SECONDS/10,
         memory_limit=8192
     )
     training_time = TIMER.tocvalue()
