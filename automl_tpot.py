@@ -1,11 +1,11 @@
 from tpot import TPOTClassifier
 
 from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
-                    TIMER, collect_and_persist_results, load_csv, load_openml)
+                    TIMER, collect_and_persist_results, load_data_delegate)
 
 try:
 
-    X_train, X_test, y_train, y_test = load_openml(44)
+    X_train, X_test, y_train, y_test = load_data_delegate()
 
     clf = TPOTClassifier(max_time_mins=EXEC_TIME_MINUTES, cv=5, random_state=SEED)
 

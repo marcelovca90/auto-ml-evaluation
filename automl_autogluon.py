@@ -2,11 +2,11 @@ import pandas as pd
 from autogluon.tabular import TabularDataset, TabularPredictor
 
 from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
-                    TIMER, collect_and_persist_results, load_csv, load_openml)
+                    TIMER, collect_and_persist_results, load_data_delegate)
 
 try:
 
-    X_train, X_test, y_train, y_test = load_openml(44)
+    X_train, X_test, y_train, y_test = load_data_delegate()
     train_df = pd.DataFrame(X_train).assign(**{'class': pd.Series(y_train)}).dropna()
     test_df = pd.DataFrame(X_test).assign(**{'class': pd.Series(y_test)}).dropna()
 

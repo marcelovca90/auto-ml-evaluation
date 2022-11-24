@@ -1,13 +1,13 @@
 from evalml.automl import AutoMLSearch
 
 from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
-                    TIMER, collect_and_persist_results, load_csv, load_openml)
+                    TASK_TYPE, TIMER, collect_and_persist_results, load_data_delegate)
 
 try:
 
-    X_train, X_test, y_train, y_test = load_openml(44)
+    X_train, X_test, y_train, y_test = load_data_delegate()
 
-    clf = AutoMLSearch(X_train=X_train, y_train=y_train, problem_type='binary', random_seed=SEED, max_time=EXEC_TIME_SECONDS)
+    clf = AutoMLSearch(X_train=X_train, y_train=y_train, problem_type=TASK_TYPE, random_seed=SEED, max_time=EXEC_TIME_SECONDS)
 
     TIMER.tic()
     clf.search()

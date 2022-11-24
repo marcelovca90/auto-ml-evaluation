@@ -10,21 +10,25 @@ import pandas as pd
 import time
 
 DATASET_FOLDER = 'datasets/iot_23'
-EXEC_TIME_MINUTES = 5
+EXEC_TIME_MINUTES = 1
 EXEC_TIME_SECONDS = EXEC_TIME_MINUTES*60
 SEED = 42
+TASK_TYPE = 'multiclass' if DATASET_FOLDER in ['datasets/iot_23', 'datasets/mqtt_iot_ids2020'] else 'binary'
 TIMER = TicToc()
 
-def load_openml(dataset_id=44):
-    X, y = fetch_openml(data_id=dataset_id, return_X_y=True)
-    y = LabelEncoder().fit_transform(y)
-    return train_test_split(X, y, test_size=0.2, random_state=SEED)
+def load_data_delegate():
+    return load_openml(44)
 
 def load_csv(dataset_folder, filename):
     base_folder = os.path.join(os.path.dirname(__file__), dataset_folder)
     full_filename = os.path.join(base_folder, filename)
     df = pd.read_csv(filepath_or_buffer=full_filename).infer_objects().to_numpy()
     return df.ravel() if df.shape[1] == 1 else df
+
+def load_openml(dataset_id):
+    X, y = fetch_openml(data_id=dataset_id, return_X_y=True)
+    y = LabelEncoder().fit_transform(y)
+    return train_test_split(X, y, test_size=0.2, random_state=SEED)
 
 def calculate_score(metric, y_true, y_pred, **kwargs):
 	try:

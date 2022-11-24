@@ -1,12 +1,13 @@
+import numpy as np
 import pandas as pd
 from pycaret.classification import *
 
 from common import (DATASET_FOLDER, EXEC_TIME_MINUTES, EXEC_TIME_SECONDS, SEED,
-                    TIMER, collect_and_persist_results, load_csv, load_openml)
+                    TIMER, collect_and_persist_results, load_data_delegate)
 
 try:
 
-    X_train, X_test, y_train, y_test = load_openml(44)
+    X_train, X_test, y_train, y_test = load_data_delegate()
     train_df = pd.DataFrame(X_train).assign(**{'class': pd.Series(y_train)}).dropna()
     test_df = pd.DataFrame(X_test).assign(**{'class': pd.Series(y_test)}).dropna()
 
@@ -21,8 +22,9 @@ try:
 
     TIMER.tic()
     y_test = test_df['class'].values
+    score_nums = [f'Score_{i}' for i in range(0, len(set(y_test)))]
     y_pred_df = predict_model(best, test_df, raw_score=True)
-    y_pred = [np.argmax(i) for i in y_pred_df[["Score_0", "Score_1"]].to_numpy()]
+    y_pred = [np.argmax(i) for i in y_pred_df[score_nums].to_numpy()]
     test_time = TIMER.tocvalue()
 
     collect_and_persist_results(y_test, y_pred, training_time, test_time, "pycaret")
