@@ -3,6 +3,7 @@ import json
 import matplotlib.pyplot as plt
 import os
 import pandas as pd
+from common import *
 
 metric = 'f1_score_weighted'
 
@@ -12,9 +13,9 @@ plt.rcParams['font.size'] = '16'
 plot_data = {}
 markdown_data = pd.DataFrame()
 
-for filename in os.listdir("./results"):
+for filename in os.listdir(f"./results/{DATASET_REF}"):
     if filename.endswith('.json'):
-        with open(f'results/{filename}') as file:
+        with open(f'results/{DATASET_REF}/{filename}') as file:
             framework = filename.replace('automl_', '').replace('.json', '')
             content = json.load(file)
             # bar chart entries
@@ -31,8 +32,12 @@ for k,v in plot_data.items():
     plt.bar(k, v)
     plt.text(k, v+0.01, f'{v:.03f}')
 plt.title(f'Results ({metric})')
-plt.savefig(f'./results/automl.png')
+plt.savefig(f'./results/{DATASET_REF}/automl.png')
+
+# write csv foçe
+with open(f'results/{DATASET_REF}/automl.csv', 'w') as file:
+    file.write(f'{markdown_data.sort_index().to_csv(index=False)}\n')
 
 # write markdown table
-with open(f'results/automl.md', 'w') as file:
-    file.write(f'{markdown_data.sort_index().to_markdown(tablefmt="grid")}\n')
+with open(f'results/{DATASET_REF}/automl.md', 'w') as file:
+    file.write(f'{markdown_data.sort_index().to_markdown(index=False, tablefmt="grid")}\n')

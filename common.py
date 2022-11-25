@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 # for reference:
 # - binary = 37 (diabetes) or 44 (spambase)
 # - multiclass = 61 (iris) or 32 (pendigits)
-DATASET_REF = 37
+DATASET_REF = ''
 EXEC_TIME_MINUTES = 1
 EXEC_TIME_SECONDS = EXEC_TIME_MINUTES*60
 SEED = 42
@@ -35,20 +35,19 @@ def load_data_delegate():
     else:
         raise Exception('DATASET_REFERENCE must be int (OpenML) or str (local CSV)')
 
-def load_csv(dataset_folder=DATASET_REF):
-    base_folder = os.path.join(os.path.dirname(__file__), dataset_folder)
-    filenames = ['X_train.csv', 'y_train.csv', 'X_test.csv', 'y_test.csv']
+def load_csv():
+    base_folder = os.path.join(os.path.dirname(__file__), 'datasets', DATASET_REF)
+    filenames = ['X_train.csv', 'X_test.csv', 'y_train.csv', 'y_test.csv']
     dfs = []
     for filename in filenames:
         full_filename = os.path.join(base_folder, filename)
-        dfs.append(pd.read_csv(filepath_or_buffer=full_filename).infer_objects().to_numpy())
-    parsed_dfs = [df.ravel() for df in dfs if df.shape[1]]
-    return parsed_dfs
+        csv = pd.read_csv(filepath_or_buffer=full_filename).infer_objects().to_numpy()
+        dfs.append(csv.ravel() if csv.shape[1] == 1 else csv)
+    return dfs[0], dfs[1], dfs[2], dfs[3]
 
-def load_openml(dataset_id=DATASET_REF):
-    dataset = fetch_openml(data_id=dataset_id, return_X_y=False)
+def load_openml():
+    dataset = fetch_openml(data_id=DATASET_REF, return_X_y=False)
     X, y = dataset.data, pd.Series(pd.factorize(dataset.target)[0])
-    #y = LabelEncoder().fit_transform(y)
     return train_test_split(X, y, test_size=0.2, random_state=SEED)
 
 def calculate_score(metric, y_true, y_pred, **kwargs):
@@ -59,6 +58,7 @@ def calculate_score(metric, y_true, y_pred, **kwargs):
 
 def collect_and_persist_results(y_test, y_pred, training_time, test_time, framework="unknown"):
   results = {}
+  results.update({"framework":               framework})
   results.update({"accuracy_score":          calculate_score(accuracy_score, y_test, y_pred)})
   results.update({"average_precision_score": calculate_score(average_precision_score, y_test, y_pred)})
   results.update({"balanced_accuracy_score": calculate_score(balanced_accuracy_score, y_test, y_pred)})
@@ -73,10 +73,7 @@ def collect_and_persist_results(y_test, y_pred, training_time, test_time, framew
   results.update({"training_time": time.strftime("%H:%M:%S", time.gmtime(training_time))})
   results.update({"test_time": time.strftime("%H:%M:%S", time.gmtime(test_time))})
   print(results)
-  with open(f"./results/automl_{framework}.json", "w") as outfile:
+  if not os.path.exists(f'./results/{DATASET_REF}'):
+    os.makedirs(f'./results/{DATASET_REF}')
+  with open(f"./results/{DATASET_REF}/automl_{framework}.json", "w") as outfile:
     json.dump(results, outfile)
-
-def load_csv(dataset_folder, filename):
-    full_filename = os.path.join(dataset_folder, filename)
-    df = pd.read_csv(filepath_or_buffer=full_filename).infer_objects().to_numpy()
-    return df.ravel() if df.shape[1] == 1 else df

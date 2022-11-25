@@ -95,7 +95,7 @@ echo ======== Plotter ========
 python3.8 -m venv venv-plotter
 source ./venv-plotter/bin/activate
 python3.8 -m pip install --upgrade pip
-python3.8 -m pip install --upgrade setuptools pytictoc wheel matplotlib pandas tabulate
+python3.8 -m pip install --upgrade setuptools pytictoc wheel scikit-learn matplotlib pandas tabulate
 python3.8 ./plotter.py
 
 echo Script execution finished at $(date).
