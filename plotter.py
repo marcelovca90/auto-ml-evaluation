@@ -34,10 +34,8 @@ for k,v in plot_data.items():
 plt.title(f'Results ({metric})')
 plt.savefig(f'./results/{DATASET_REF}/automl.png')
 
-# write csv foçe
-with open(f'results/{DATASET_REF}/automl.csv', 'w') as file:
-    file.write(f'{markdown_data.sort_index().to_csv(index=False)}\n')
-
-# write markdown table
-with open(f'results/{DATASET_REF}/automl.md', 'w') as file:
-    file.write(f'{markdown_data.sort_index().to_markdown(index=False, tablefmt="grid")}\n')
+# write csv, xlsx, and markdown files
+markdown_data.sort_index(inplace=True)
+markdown_data.to_csv(f'results/{DATASET_REF}/automl.csv', index=False)
+markdown_data.to_excel(f'results/{DATASET_REF}/automl.xlsx', index=False)
+markdown_data.to_markdown(f'results/{DATASET_REF}/automl.md', index=False, tablefmt='pipe')
