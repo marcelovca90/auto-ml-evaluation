@@ -4,7 +4,6 @@ from autogluon.tabular import TabularDataset, TabularPredictor
 from common import *
 
 try:
-
     X_train, X_test, y_train, y_test = load_data_delegate()
     train_df = pd.DataFrame(X_train).assign(**{'class': pd.Series(y_train)}).dropna()
     test_df = pd.DataFrame(X_test).assign(**{'class': pd.Series(y_test)}).dropna()
@@ -23,4 +22,4 @@ try:
     collect_and_persist_results(y_test, y_pred, training_time, test_time, "autogluon")
 
 except Exception as e:
-    print(f'Cannot run autogluon for dataset {DATASET_REF}. Reason: {str(e)}')
+    print(f'Cannot run autogluon for dataset {get_dataset_ref()}. Reason: {str(e)}')

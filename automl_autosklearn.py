@@ -19,4 +19,4 @@ try:
     collect_and_persist_results(y_test, y_pred, training_time, test_time, "autosklearn")
 
 except Exception as e:
-    print(f'Cannot run autosklearn for dataset {DATASET_REF}. Reason: {str(e)}')
+    print(f'Cannot run autosklearn for dataset {get_dataset_ref()}. Reason: {str(e)}')

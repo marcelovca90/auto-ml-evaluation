@@ -22,4 +22,4 @@ try:
     collect_and_persist_results(y_test, y_pred, training_time, test_time, "h2o")
 
 except Exception as e:
-    print(f'Cannot run h2o for dataset {DATASET_REF}. Reason: {str(e)}')
+    print(f'Cannot run h2o for dataset {get_dataset_ref()}. Reason: {str(e)}')

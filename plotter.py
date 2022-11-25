@@ -13,9 +13,9 @@ plt.rcParams['font.size'] = '16'
 plot_data = {}
 markdown_data = pd.DataFrame()
 
-for filename in os.listdir(f"./results/{DATASET_REF}"):
+for filename in os.listdir(f"./results/{get_dataset_ref()}"):
     if filename.endswith('.json'):
-        with open(f'results/{DATASET_REF}/{filename}') as file:
+        with open(f'results/{get_dataset_ref()}/{filename}') as file:
             framework = filename.replace('automl_', '').replace('.json', '')
             content = json.load(file)
             # bar chart entries
@@ -32,10 +32,10 @@ for k,v in plot_data.items():
     plt.bar(k, v)
     plt.text(k, v+0.01, f'{v:.03f}')
 plt.title(f'Results ({metric})')
-plt.savefig(f'./results/{DATASET_REF}/automl.png')
+plt.savefig(f'./results/{get_dataset_ref()}/automl.png')
 
 # write csv, xlsx, and markdown files
 markdown_data.sort_index(inplace=True)
-markdown_data.to_csv(f'results/{DATASET_REF}/automl.csv', index=False)
-markdown_data.to_excel(f'results/{DATASET_REF}/automl.xlsx', index=False)
-markdown_data.to_markdown(f'results/{DATASET_REF}/automl.md', index=False, tablefmt='pipe')
+markdown_data.to_csv(f'results/{get_dataset_ref()}/automl.csv', index=False)
+markdown_data.to_excel(f'results/{get_dataset_ref()}/automl.xlsx', index=False)
+markdown_data.to_markdown(f'results/{get_dataset_ref()}/automl.md', index=False, tablefmt='pipe')

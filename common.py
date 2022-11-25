@@ -1,5 +1,6 @@
 import json
 import os
+import sys
 import time
 
 import pandas as pd
@@ -8,14 +9,21 @@ from sklearn.datasets import fetch_openml
 from sklearn.metrics import *
 from sklearn.model_selection import train_test_split
 
-# for reference:
-# - binary = 37 (diabetes) or 44 (spambase)
-# - multiclass = 61 (iris) or 32 (pendigits)
-DATASET_REF = ''
 EXEC_TIME_MINUTES = 1
 EXEC_TIME_SECONDS = EXEC_TIME_MINUTES*60
 SEED = 42
 TIMER = TicToc()
+
+def get_dataset_ref():
+    dataset_ref = None
+    if len(sys.argv) != 2:
+        print('usage: python common.py dataset_ref; using default dataset (61 - iris)')
+    else:
+        try:
+            dataset_ref = int(sys.argv[1])
+        except:
+            dataset_ref = str(sys.argv[1])
+    return dataset_ref
 
 def infer_task_type(y_test):
     num_classes = len(set(y_test))
@@ -28,15 +36,15 @@ def infer_task_type(y_test):
     return task_type
 
 def load_data_delegate():
-    if isinstance(DATASET_REF, int):
+    if isinstance(get_dataset_ref(), int):
         return load_openml()
-    elif isinstance(DATASET_REF, str):
+    elif isinstance(get_dataset_ref(), str):
         return load_csv()
     else:
-        raise Exception('DATASET_REFERENCE must be int (OpenML) or str (local CSV)')
+        raise Exception('dataset_ref must be int (OpenML) or str (local CSV)')
 
 def load_csv():
-    base_folder = os.path.join(os.path.dirname(__file__), 'datasets', DATASET_REF)
+    base_folder = os.path.join(os.path.dirname(__file__), 'datasets', get_dataset_ref())
     filenames = ['X_train.csv', 'X_test.csv', 'y_train.csv', 'y_test.csv']
     dfs = []
     for filename in filenames:
@@ -46,7 +54,7 @@ def load_csv():
     return dfs[0], dfs[1], dfs[2], dfs[3]
 
 def load_openml():
-    dataset = fetch_openml(data_id=DATASET_REF, return_X_y=False)
+    dataset = fetch_openml(data_id=get_dataset_ref(), return_X_y=False)
     X, y = dataset.data, pd.Series(pd.factorize(dataset.target)[0])
     return train_test_split(X, y, test_size=0.2, random_state=SEED)
 
@@ -70,10 +78,10 @@ def collect_and_persist_results(y_test, y_pred, training_time, test_time, framew
   results.update({"precision_score":         calculate_score(precision_score, y_test, y_pred)})
   results.update({"recall_score":            calculate_score(recall_score, y_test, y_pred)})
   results.update({"roc_auc_score":           calculate_score(roc_auc_score, y_test, y_pred)})
-  results.update({"training_time": time.strftime("%H:%M:%S", time.gmtime(training_time))})
-  results.update({"test_time": time.strftime("%H:%M:%S", time.gmtime(test_time))})
+  results.update({"training_time":           time.strftime("%H:%M:%S", time.gmtime(training_time))})
+  results.update({"test_time":               time.strftime("%H:%M:%S", time.gmtime(test_time))})
   print(results)
-  if not os.path.exists(f'./results/{DATASET_REF}'):
-    os.makedirs(f'./results/{DATASET_REF}')
-  with open(f"./results/{DATASET_REF}/automl_{framework}.json", "w") as outfile:
+  if not os.path.exists(f'./results/{get_dataset_ref()}'):
+    os.makedirs(f'./results/{get_dataset_ref()}')
+  with open(f"./results/{get_dataset_ref()}/automl_{framework}.json", "w") as outfile:
     json.dump(results, outfile)
