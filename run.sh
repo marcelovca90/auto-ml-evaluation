@@ -2,19 +2,19 @@
 
 # Datasets
 # - binary:
-#   - 13        breast-cancer       286x10x2
-#   - 37        diabetes            768x9x2
-#   - 44        spambase            4601x58x2
-#   - 1479      hill-valley         1212x101x2
-#   - 1510      wdbc                569x31x2
+#   - 37        diabetes            		  768x9x2
+#   - 44        spambase            		  4601x58x2
+#   - 1462      banknote-authentication		1372x6x2
+#   - 1479      hill-valley         		  1212x101x2
+#   - 1510      wdbc                		  569x31x2
 # - multiclass:
-#   - 6         letter              20000x17x26
-#   - 32        pendigits           10992x17x10
-#   - 1472      energy-efficiency   768x10x37
-#   - 40664     car-evaluation      1728x22x4
-#   - 40691     wine-quality        1599x12x6
+#   - 181       yeast				              1484x9x10
+#   - 720       abalone      			        4177x9x29
+#   - 40664     car-evaluation      		  1728x22x4
+#   - 40691     wine-quality        		  1599x12x6
+#   - 43750     glass-classification    	214x11x7
 
-datasets=(13 37 44 1479 1510 6 32 1472 40664 40691)
+datasets=(37 44 1462 1479 1510 181 720 40664 40691 43750)
 
 echo Script execution started at $(date).
 
