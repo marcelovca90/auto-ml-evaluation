@@ -14,7 +14,7 @@
 #   - 40691     wine-quality        		    1599x12x69
 #   - 40975     car      		                1728x7x4
 
-datasets=(37 44 1462 1479 1510 181 720 40664 40691 43750)
+datasets=(37 44 1462 1479 1510 23 181 1466 40691 40975)
 
 echo Script execution started at $(date).
 
