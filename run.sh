@@ -34,13 +34,6 @@ for id in ${datasets[@]}; do
     echo ======== Processing ========
     echo Started processing dataset $id at $(date).
 
-datasets=(13 37 44 1479 1510 6 32 1472 40664 40691)
-
-for id in ${datasets[@]}; do
-
-    echo ======== Processing ========
-    echo Started processing dataset $id at $(date).
-
     # AutoGluon
     echo ======== AutoGluon ========
     python3.8 -m venv venv-autogluon
