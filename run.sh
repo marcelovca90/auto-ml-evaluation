@@ -21,11 +21,12 @@ echo Script execution started at $(date).
 # Preparation
 echo ======== Preparation ========
 echo Started cleaning files from previous executions at $(date).
-rm *.log &> /dev/null
-rm -rf venv-* &> /dev/null
-rm -rf structured* &> /dev/null
+rm -rf __pycache* &> /dev/null
 rm -rf Autogluon* &> /dev/null
 rf -rf gama_* &> /dev/null
+rm -rf structured* &> /dev/null
+rm -rf venv-* &> /dev/null
+rm *.log &> /dev/null
 rm results/* &> /dev/null
 echo Finished cleaning files from previous executions at $(date).
 
