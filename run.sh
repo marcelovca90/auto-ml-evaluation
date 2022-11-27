@@ -2,17 +2,17 @@
 
 # Datasets
 # - binary:
-#   - 37        diabetes                    768x9x2
-#   - 44        spambase            		4601x58x2
-#   - 1462      banknote-authentication     1372x6x2
-#   - 1479      hill-valley         		1212x101x2
-#   - 1510      wdbc                		569x31x2
+#   - 37        diabetes                        768x9x2
+#   - 44        spambase            		    4601x58x2
+#   - 1462      banknote-authentication         1372x6x2
+#   - 1479      hill-valley         		    1212x101x2
+#   - 1510      wdbc                		    569x31x2
 # - multiclass:
-#   - 181       yeast				        1484x9x10
-#   - 720       abalone      			    4177x9x29
-#   - 40664     car-evaluation      		1728x22x4
-#   - 40691     wine-quality        		1599x12x6
-#   - 43750     glass-classification        214x11x7
+#   - 23        contraceptive-method-choice	    1473x10x10
+#   - 181       yeast				            1484x9x10
+#   - 1466      cardiotocography         	    2126x24x10
+#   - 40691     wine-quality        		    1599x12x69
+#   - 40975     car      		                1728x7x4
 
 datasets=(37 44 1462 1479 1510 181 720 40664 40691 43750)
 
