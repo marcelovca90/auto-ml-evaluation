@@ -10,7 +10,7 @@
 # - multiclass:
 #   - 6         letter              20000x17x26
 #   - 32        pendigits           10992x17x10
-#   - 1472      iris                768x10x37
+#   - 1472      energy-efficiency   768x10x37
 #   - 40664     car-evaluation      1728x22x4
 #   - 40691     wine-quality        1599x12x6
 
@@ -25,8 +25,16 @@ rm *.log &> /dev/null
 rm -rf venv-* &> /dev/null
 rm -rf structured* &> /dev/null
 rm -rf Autogluon* &> /dev/null
+rf -rf gama_* &> /dev/null
 rm results/* &> /dev/null
 echo Finished cleaning files from previous executions at $(date).
+
+for id in ${datasets[@]}; do
+
+    echo ======== Processing ========
+    echo Started processing dataset $id at $(date).
+
+datasets=(13 37 44 1479 1510 6 32 1472 40664 40691)
 
 for id in ${datasets[@]}; do
 
@@ -54,7 +62,7 @@ for id in ${datasets[@]}; do
     python3.8 -m venv venv-autopytorch
     source ./venv-autopytorch/bin/activate
     python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel swig torch torchvision torchaudio --extra-index-url https://download.py $idtorch.org/whl/cpu autoPyTorch
+    python3.8 -m pip install --upgrade setuptools pytictoc wheel swig torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu autoPyTorch
     python3.8 ./automl_autopytorch.py $id
 
     # AutoSklearn
