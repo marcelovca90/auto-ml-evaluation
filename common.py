@@ -15,7 +15,7 @@ SEED = 42
 TIMER = TicToc()
 
 def get_dataset_ref():
-    dataset_ref = 37
+    dataset_ref = None
     if len(sys.argv) != 2:
         print('usage: python common.py dataset_ref')
     else:
@@ -63,7 +63,11 @@ def load_openml():
         for col in y.columns.values:
             y[col] = y[col].map({'FALSE': 0, 'TRUE': 1}).to_numpy()
     else:
-        X, y = dataset.data, pd.Series(pd.factorize(dataset.target)[0])
+        X, y = dataset.data, dataset.target
+        for col in X.columns.values:
+            if X[col].dtype.name == 'category':
+                X[col] = pd.Series(pd.factorize(X[col])[0])
+        y = pd.Series(pd.factorize(y)[0])
     return train_test_split(X, y, test_size=0.2, random_state=SEED)
 
 def calculate_score(metric, y_true, y_pred, **kwargs):
