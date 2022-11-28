@@ -13,6 +13,12 @@
 #   - 1466      cardiotocography         	    2126x24x10
 #   - 40691     wine-quality        		    1599x12x69
 #   - 40975     car      		                1728x7x4
+# - multilabel:
+#   - 41465        emotions             	    593x78x6
+#   - 41468        image                 	    2000x140x5
+#   - 41470        reuters                 	    2000x250x7
+#   - 41471        scene                 	    2407x300x6
+#   - 41473        yeast                 	    2417x117x14
 
 datasets=(37 44 1462 1479 1510 23 181 1466 40691 40975)
 
