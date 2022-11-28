@@ -15,6 +15,7 @@ try:
         X_test=X_test,
         y_test=y_test,
         optimize_metric='accuracy',
+        budget_type='runtime',
         total_walltime_limit=EXEC_TIME_SECONDS,
         func_eval_time_limit_secs=EXEC_TIME_SECONDS/10,
         memory_limit=8192
