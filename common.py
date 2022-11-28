@@ -15,7 +15,7 @@ SEED = 42
 TIMER = TicToc()
 
 def get_dataset_ref():
-    dataset_ref = None
+    dataset_ref = 37
     if len(sys.argv) != 2:
         print('usage: python common.py dataset_ref')
     else:
@@ -25,18 +25,18 @@ def get_dataset_ref():
             dataset_ref = str(sys.argv[1])
     return dataset_ref
 
-def infer_task_type(y_test=None):
-    if get_dataset_ref() in [41465, 41468, 41470, 41471, 41473]:
-        task_type = 'multilabel'
+def infer_task_type(y_test):
+    num_classes = len(set(y_test))
+    if num_classes == 1:
+        raise Exception('Malformed data set; num_classes == 1')
+    elif num_classes == 2:
+        task_type = 'binary'
     else:
-        num_classes = len(set(y_test))
-        if num_classes == 1:
-            raise Exception('Malformed data set; num_classes == 1')
-        elif num_classes == 2:
-            task_type = 'binary'
-        else:
-            task_type = 'multiclass'
+        task_type = 'multiclass'
     return task_type
+
+def is_multi_label():
+    return get_dataset_ref() in [41465, 41468, 41470, 41471, 41473]
 
 def load_data_delegate():
     if isinstance(get_dataset_ref(), int):
@@ -58,7 +58,7 @@ def load_csv():
 
 def load_openml():
     dataset = fetch_openml(data_id=get_dataset_ref(), return_X_y=False)
-    if infer_task_type() == 'multilabel':
+    if is_multi_label():
         X, y = dataset.data, dataset.target
         for col in y.columns.values:
             y[col] = y[col].map({'FALSE': 0, 'TRUE': 1}).to_numpy()

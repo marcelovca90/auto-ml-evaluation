@@ -6,15 +6,15 @@ try:
 
     X_train, X_test, y_train, y_test = load_data_delegate()
 
-    is_multi_label = infer_task_type(y_test)
-    autokeras = ak.StructuredDataClassifier(multi_label=is_multi_label, max_trials=3, overwrite=True, seed=SEED)
+    multi_label = is_multi_label()
+    autokeras = ak.StructuredDataClassifier(multi_label=multi_label, max_trials=3, overwrite=True, seed=SEED)
 
     TIMER.tic()
     autokeras.fit(X_train, y_train, epochs=1000)
     training_time = TIMER.tocvalue()
 
     TIMER.tic()
-    if is_multi_label:
+    if multi_label:
         y_pred = autokeras.predict(X_test).astype(int)
     else:
         y_pred = autokeras.predict(X_test).astype(int).flatten()
