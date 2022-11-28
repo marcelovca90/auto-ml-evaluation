@@ -6,18 +6,16 @@ try:
 
     X_train, X_test, y_train, y_test = load_data_delegate()
 
-    multi_label = get_dataset_ref() in [41465, 41468, 41470, 41471, 41473]
-    autokeras = ak.StructuredDataClassifier(multi_label=multi_label, max_trials=3, overwrite=True, seed=SEED)
+    is_multi_label = infer_task_type(y_test)
+    autokeras = ak.StructuredDataClassifier(multi_label=is_multi_label, max_trials=3, overwrite=True, seed=SEED)
 
     TIMER.tic()
     autokeras.fit(X_train, y_train, epochs=1000)
     training_time = TIMER.tocvalue()
 
     TIMER.tic()
-    # multilabel datasets
-    if get_dataset_ref() in [41465, 41468, 41470, 41471, 41473]:
+    if is_multi_label:
         y_pred = autokeras.predict(X_test).astype(int)
-    # binary and multiclass datasets
     else:
         y_pred = autokeras.predict(X_test).astype(int).flatten()
     test_time = TIMER.tocvalue()
