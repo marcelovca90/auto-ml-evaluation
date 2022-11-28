@@ -14,7 +14,7 @@ try:
 
     TIMER.tic()
     # multilabel datasets
-    if get_dataset_ref() in [41465, 41468, 42470, 41471, 41473]:
+    if get_dataset_ref() in [41465, 41468, 41470, 41471, 41473]:
         y_pred = autokeras.predict(X_test).astype(int)
     # binary and multiclass datasets
     else:

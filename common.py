@@ -56,7 +56,7 @@ def load_csv():
 def load_openml():
     dataset = fetch_openml(data_id=get_dataset_ref(), return_X_y=False)
      # multilabel datasets
-    if get_dataset_ref() in [41465, 41468, 42470, 41471, 41473]:
+    if get_dataset_ref() in [41465, 41468, 41470, 41471, 41473]:
         X, y = dataset.data, dataset.target
         for col in y.columns.values:
             y[col] = y[col].map({'FALSE': 0, 'TRUE': 1}).to_numpy()
