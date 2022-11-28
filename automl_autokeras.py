@@ -6,7 +6,8 @@ try:
 
     X_train, X_test, y_train, y_test = load_data_delegate()
 
-    autokeras = ak.StructuredDataClassifier(multi_label=True, max_trials=3, overwrite=True, seed=SEED)
+    multi_label = get_dataset_ref() in [41465, 41468, 41470, 41471, 41473]
+    autokeras = ak.StructuredDataClassifier(multi_label=multi_label, max_trials=3, overwrite=True, seed=SEED)
 
     TIMER.tic()
     autokeras.fit(X_train, y_train, epochs=1000)
