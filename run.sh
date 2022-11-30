@@ -11,7 +11,7 @@
 #   - 23        contraceptive-method-choice	    1473x10x10
 #   - 181       yeast				            1484x9x10
 #   - 1466      cardiotocography         	    2126x24x10
-#   - 40691     wine-quality        		    1599x12x69
+#   - 40691     wine-quality        		    1599x12x6
 #   - 40975     car      		                1728x7x4
 # - multilabel:
 #   - 41465        emotions             	    593x78x6
