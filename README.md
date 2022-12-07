@@ -1,15 +1,15 @@
-# A pratical evaluation of AutoML tools for binary, multiclass, and multilabel classification
+# A practical evaluation of AutoML tools for binary, multiclass, and multilabel classification
+Authors: Augusto Guimarães Afonso, Rafaela Cristina Ferraz, Rairon Gonçalves Ferreira, Sávio Leite, and Marcelo Vinícius Cysneiros Aragão.
 
 ## Abstract:
-	Due to the existence of several Automated Machine Learning (AutoML) tools with different features, it becomes difficult to decide
-	which is the best option to solve each type of classification problem. To reduce the demand for people with high technical
-	knowledge in the subject, it is necessary to consider aspects such as performance metrics and time when choosing the algorithm
-	to be used. There are some comparisons of AutoML tools and approaches that perform tests in the area of data preprocessing,
-	model selection, and hyperparameter optimization. However, most of these studies focus on binary and multiclass
-	classification, not covering multilabel classifications and consequently not exploiting the tools' full potential.
-	In this paper, a comparative study between multiple AutoML tools is performed related to the features, architecture, 
-	capabilities, and results achieved on binary, multiclass, and multilabel classification problems from experimentation
-	on various data sets.
+	Due to the existence of several Automated Machine Learning (AutoML) tools with different features, it becomes difficult to decide 
+	which is the best option to solve each type of classification problem. It is necessary to consider aspects such as performance 
+	metrics and time when choosing the algorithm to be used to reduce the demand for highly technical, specific knowledge in the 
+	subject. There are some comparisons of AutoML tools and approaches that perform tests in the area of data preprocessing, model 
+	selection, and hyperparameter optimization. However, most of these studies focus on binary and multiclass classification, not 
+	covering multilabel classifications and consequently not exploiting the tools' full potential. In this paper, a comparative study 
+	between multiple AutoML tools is performed related to the features, architecture, capabilities, and results achieved on binary, 
+	multiclass, and multilabel classification problems from experimentation on various data sets.
 
 ## How to run our tests:
 ### To run our tests we need a linux OS or a Virtual Machine with ubunto on Windows.
