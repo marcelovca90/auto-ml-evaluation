@@ -1,5 +1,6 @@
 # A practical evaluation of AutoML tools for binary, multiclass, and multilabel classification
-Authors: Augusto Guimarães Afonso, Rafaela Cristina Ferraz, Rairon Gonçalves Ferreira, Sávio Leite, and Marcelo Vinícius Cysneiros Aragão.
+
+Authors: *Augusto Guimarães Afonso, Rafaela Cristina Ferraz, Rairon Gonçalves Ferreira, Sávio Leite, and Marcelo Vinícius Cysneiros Aragão.*
 
 ## Abstract:
 	Due to the existence of several Automated Machine Learning (AutoML) tools with different features, it becomes difficult to decide 
@@ -12,15 +13,15 @@ Authors: Augusto Guimarães Afonso, Rafaela Cristina Ferraz, Rairon Gonçalves F
 	multiclass, and multilabel classification problems from experimentation on various data sets.
 
 ## How to run our tests:
-### To run our tests we need a linux OS or a Virtual Machine with ubunto on Windows.
-#### If using windows OS, you will need to make a few configurations to avoid future problems with some frameworks:
+### To run our tests we need a Linux OS (bare-metal or virtualized).
+#### If you are using Windows OS, you will need to make a few configurations to avoid future problems with some frameworks:
 - Enable virtualization at your mainboard BIOS ([example](https://www.youtube.com/watch?v=GK0DOfdLCa8))
 
 - Open the command prompt as Admin and type:
 	- `bcdedit /set hypervisorlaunchtype off`
 	- `DISM /Online /Disable-Feature:Microsoft-Hyper-V`
 
-- At windows menu, search for "Turn Windows features on or off"
+- At Windows menu, search for "Turn Windows features on or off" and:
 	- Turn off Hyper-V
 	- Turn off Virtual Machine Platform
 	- Turn off Windows Hypervisor Platform
@@ -29,32 +30,32 @@ Authors: Augusto Guimarães Afonso, Rafaela Cristina Ferraz, Rairon Gonçalves F
 
 #### How to download and run the Virtual Machine:
 
-- download the [Oracle VM VirtualBox](https://download.virtualbox.org/virtualbox/7.0.4/VirtualBox-7.0.4-154605-Win.exe)
+- Download the [Oracle VM VirtualBox](https://download.virtualbox.org/virtualbox/7.0.4/VirtualBox-7.0.4-154605-Win.exe)
 
-- download the Ubuntu [22.04.1 LTS](https://releases.ubuntu.com/22.04/ubuntu-22.04.1-desktop-amd64.iso)
+- Download the Ubuntu [22.04.1 LTS](https://releases.ubuntu.com/22.04/ubuntu-22.04.1-desktop-amd64.iso)
 
-- Creating the Ubuntu VM at VirtualBox:
+- Create the Ubuntu VM at VirtualBox:
 	- Choose the downloaded ISO
 	- Select the option `Skip Unattended Installation`
-	- Define user and password as automl; and machine name as automl-VirtualBox
-	- allocate at least 40GB disc, 8GB RAM and 2 CPU cores
+	- Define user and password as automl and machine name as automl-VirtualBox
+	- allocate at least 40GB disk, 8GB RAM and 2 CPU cores
 
 - Now execute the Ubunto VM and proceed with installation
 
 #### After you have finished Ubuntu installation, follow these steps:
-- check if the AVX instruction is in the list of instructions supported by the CPU
+- Check if the AVX instruction is in the list of instructions supported by the CPU
 	- `more /proc/- cpuinfo | grep flags | grep avx`
 - Open the terminal and type:
 	- `sudo apt-get update -y`
 	- `sudo apt-get install gcc make perl -y`
 - Install the VBox Guest Additions:
 	- Click the "Devices" menu and select "Insert Guest Additions CD image"
-	- Copy the CD to the user folder (`cp -r /media/automl/VBox_GAs_7.0.2 ~/`)
-	- Change to user folder (`cd ~/VBox_GAs_7.0.2/`)
-	- Execute the installer with admin privileges (`sudo ./VBoxLinusAdditions.run`)
+	- Copy the image content to the user folder (`cp -r /media/automl/VBox_GAs_7.0.2 ~/`)
+	- Change to the user folder (`cd ~/VBox_GAs_7.0.2/`)
+	- Run the installer with admin privileges (`sudo ./VBoxLinusAdditions.run`)
 	- `reboot`
 	
-- Then, Execute the following commands at Terminal:
+- Then, execute the following commands at the terminal:
 	- `sudo add-apt-repository ppa:deadsnakes/ppa -y`
 	- `sudo apt-get update -y`
 	- `sudo apt-get upgrade -y`
