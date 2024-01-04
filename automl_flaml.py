@@ -2,21 +2,35 @@ from flaml import AutoML
 
 from common import *
 
-try:
+if __name__ == "__main__":
 
-    X_train, X_test, y_train, y_test = load_data_delegate()
+    try:
 
-    clf = AutoML()
+        for SEED in PRIME_NUMBERS:
 
-    TIMER.tic()
-    clf.fit(X_train, y_train, metric="accuracy", task="classification", time_budget=EXEC_TIME_SECONDS)
-    training_time = TIMER.tocvalue()
+            set_random_seed(SEED)
 
-    TIMER.tic()
-    y_pred = clf.predict(X_test)
-    test_time = TIMER.tocvalue()
+            X_train, X_test, y_train, y_test = load_data_delegate(SEED)
 
-    collect_and_persist_results(y_test, y_pred, training_time, test_time, "flaml")
+            clf = AutoML(n_jobs=NUM_CPUS, seed=SEED)
+            print('yadayadayadayadayadayadayadayadayadayada', type(clf), clf)
 
-except Exception as e:
-    print(f'Cannot run flaml for dataset {get_dataset_ref()}. Reason: {str(e)}')
+            TIMER.tic()
+            clf.fit(
+                X_train, 
+                y_train, 
+                metric="accuracy",
+                task="classification",
+                time_budget=EXEC_TIME_SECONDS
+            )
+            training_time = TIMER.tocvalue()
+
+            TIMER.tic()
+            print('yadayadayadayadayadayadayadayadayadayada', type(clf), clf)
+            y_pred = clf.predict(X_test)
+            test_time = TIMER.tocvalue()
+
+            collect_and_persist_results(y_test, y_pred, training_time, test_time, "flaml", SEED)
+
+    except Exception as e:
+        print(f'Cannot run flaml for dataset {get_dataset_ref()}. Reason: {str(e)}')

@@ -2,21 +2,34 @@ from autosklearn.classification import AutoSklearnClassifier
 
 from common import *
 
-try:
+if __name__ == "__main__":
 
-    X_train, X_test, y_train, y_test = load_data_delegate()
+    try:
+        
+        for SEED in PRIME_NUMBERS:
 
-    clf = AutoSklearnClassifier(time_left_for_this_task=EXEC_TIME_SECONDS, resampling_strategy="cv", resampling_strategy_arguments={"folds": 5}, seed=SEED)
+            set_random_seed(SEED)
+                
+            X_train, X_test, y_train, y_test = load_data_delegate(SEED)
 
-    TIMER.tic()
-    clf.fit(X_train, y_train)
-    training_time = TIMER.tocvalue()
+            clf = AutoSklearnClassifier(
+                time_left_for_this_task=EXEC_TIME_SECONDS,
+                per_run_time_limit=EXEC_TIME_SECONDS//10,
+                resampling_strategy="cv",
+                resampling_strategy_arguments={"folds": 5},
+                n_jobs=NUM_CPUS,
+                seed=SEED
+            )
 
-    TIMER.tic()
-    y_pred = clf.predict(X_test)
-    test_time = TIMER.tocvalue()
+            TIMER.tic()
+            clf.fit(X_train, y_train)
+            training_time = TIMER.tocvalue()
 
-    collect_and_persist_results(y_test, y_pred, training_time, test_time, "autosklearn")
+            TIMER.tic()
+            y_pred = clf.predict(X_test)
+            test_time = TIMER.tocvalue()
 
-except Exception as e:
-    print(f'Cannot run autosklearn for dataset {get_dataset_ref()}. Reason: {str(e)}')
+            collect_and_persist_results(y_test, y_pred, training_time, test_time, "autosklearn", SEED)
+
+    except Exception as e:
+        print(f'Cannot run autosklearn for dataset {get_dataset_ref()}. Reason: {str(e)}')

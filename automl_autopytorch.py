@@ -1,32 +1,38 @@
+from multiprocessing import freeze_support
 from autoPyTorch.api.tabular_classification import TabularClassificationTask
 
 from common import *
 
-try:
+if __name__ == "__main__":
+    
+    try:
 
-    X_train, X_test, y_train, y_test = load_data_delegate()
+        for SEED in PRIME_NUMBERS:
 
-    clf = TabularClassificationTask(seed=SEED)
+            set_random_seed(SEED)
 
-    TIMER.tic()
-    clf.search(
-        X_train=X_train,
-        y_train=y_train,
-        X_test=X_test,
-        y_test=y_test,
-        optimize_metric='accuracy',
-        budget_type='runtime',
-        total_walltime_limit=EXEC_TIME_SECONDS,
-        func_eval_time_limit_secs=EXEC_TIME_SECONDS/10,
-        memory_limit=8192
-    )
-    training_time = TIMER.tocvalue()
+            X_train, X_test, y_train, y_test = load_data_delegate(SEED)
 
-    TIMER.tic()
-    y_pred = clf.predict(X_test)
-    test_time = TIMER.tocvalue()
+            clf = TabularClassificationTask(n_jobs=NUM_CPUS, seed=SEED)
 
-    collect_and_persist_results(y_test, y_pred, training_time, test_time, "autopytorch")
+            TIMER.tic()
+            clf.search(
+                X_train=X_train,
+                y_train=y_train,
+                X_test=X_test,
+                y_test=y_test,
+                optimize_metric='accuracy',
+                budget_type='runtime',
+                total_walltime_limit=EXEC_TIME_SECONDS,
+                func_eval_time_limit_secs=EXEC_TIME_SECONDS//10
+            )
+            training_time = TIMER.tocvalue()
 
-except Exception as e:
-    print(f'Cannot run autopytorch for dataset {get_dataset_ref()}. Reason: {str(e)}')
+            TIMER.tic()
+            y_pred = clf.predict(X_test)
+            test_time = TIMER.tocvalue()
+
+            collect_and_persist_results(y_test, y_pred, training_time, test_time, "autopytorch", SEED)
+
+    except Exception as e:
+        print(f'Cannot run autopytorch for dataset {get_dataset_ref()}. Reason: {str(e)}')
