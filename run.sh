@@ -106,7 +106,7 @@ for id in ${datasets[@]}; do
     sed -i 's/ SCORERS/ _SCORERS/' ./venv-gama/lib/python3.8/site-packages/gama/utilities/metrics.py
     python3.8 ./automl_gama.py $id
 
-    H2O
+    # H2O
     echo ======== H2O ========
     python3.8 -m venv venv-h2o
     source ./venv-h2o/bin/activate
@@ -122,7 +122,7 @@ for id in ${datasets[@]}; do
     python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn lightautoml
     python3.8 ./automl_lightautoml.py $id
 
-    TPOT
+    # TPOT
     echo ======== TPOT ========
     python3.8 -m venv venv-tpot
     source ./venv-tpot/bin/activate

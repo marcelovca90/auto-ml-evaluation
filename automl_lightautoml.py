@@ -6,10 +6,10 @@ from lightautoml.tasks import Task
 from common import *
 
 if __name__ == "__main__":
-    
-    try:
 
-        for SEED in PRIME_NUMBERS:
+    for SEED in PRIME_NUMBERS:
+        
+        try:
 
             set_random_seed(SEED)
 
@@ -38,5 +38,5 @@ if __name__ == "__main__":
 
             collect_and_persist_results(y_test, y_pred, training_time, test_time, "lightautoml", SEED)
 
-    except Exception as e:
-        print(f'Cannot run lightautoml for dataset {get_dataset_ref()}. Reason: {str(e)}')
+        except Exception as e:
+            print(f'Cannot run lightautoml for dataset {get_dataset_ref()} (seed={SEED}). Reason: {str(e)}')

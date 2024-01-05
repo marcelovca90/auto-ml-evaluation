@@ -10,7 +10,9 @@ from sklearn.datasets import fetch_openml
 from sklearn.metrics import *
 from sklearn.model_selection import train_test_split
 
-EXEC_TIME_MINUTES = 1
+# pd.options.mode.chained_assignment = None
+
+EXEC_TIME_MINUTES = 10
 EXEC_TIME_SECONDS = EXEC_TIME_MINUTES*60
 NUM_CPUS = multiprocessing.cpu_count()
 PRIME_NUMBERS = [
@@ -93,15 +95,14 @@ def load_csv():
 
 def load_openml(seed):
     dataset = fetch_openml(data_id=get_dataset_ref(), return_X_y=False)
+    X, y = dataset.data.copy(deep=True), dataset.target.copy(deep=True)
     if is_multi_label():
-        X, y = dataset.data, dataset.target
         for col in y.columns.values:
             y[col] = y[col].map({'FALSE': 0, 'TRUE': 1}).to_numpy()
     else:
-        X, y = dataset.data, dataset.target
         for col in X.columns.values:
             if X[col].dtype.name == 'category':
-                X[col] = pd.Series(pd.factorize(X[col])[0])
+                X.loc[:, col] = pd.Series(pd.factorize(X[col])[0])
         y = pd.Series(pd.factorize(y)[0])
     return train_test_split(X, y, test_size=0.2, random_state=seed)
 
@@ -144,7 +145,7 @@ def collect_and_persist_results(y_test, y_pred, training_time, test_time, framew
         "training_time":                            training_time,
         "test_time":                                test_time
     }
-    print(this_result)
+    print(f"\n\n{'*' * 80}\n{framework} => {this_result}\n{'*' * 80}\n\n")
     all_results['results'].append(this_result)
     with open(results_filename, 'w') as outfile:
         json.dump(all_results, outfile)

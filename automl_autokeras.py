@@ -4,9 +4,9 @@ from common import *
 
 if __name__ == "__main__":
 
-    try:
+    for SEED in PRIME_NUMBERS:
         
-        for SEED in PRIME_NUMBERS:
+        try:
 
             set_random_seed(SEED)
 
@@ -21,7 +21,7 @@ if __name__ == "__main__":
             )
 
             TIMER.tic()
-            autokeras.fit(X_train, y_train, epochs=1000)
+            autokeras.fit(X_train, y_train, epochs=300)
             training_time = TIMER.tocvalue()
 
             TIMER.tic()
@@ -33,5 +33,5 @@ if __name__ == "__main__":
 
             collect_and_persist_results(y_test, y_pred, training_time, test_time, "autokeras", SEED)
 
-    except Exception as e:
-        print(f'Cannot run autokeras for dataset {get_dataset_ref()}. Reason: {str(e)}')
+        except Exception as e:
+            print(f'Cannot run autokeras for dataset {get_dataset_ref()} (seed={SEED}). Reason: {str(e)}')
