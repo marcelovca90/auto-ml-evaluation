@@ -132,3 +132,5 @@ dmypy.json
 **/venv*
 **/structured*
 **/Autogluon*
+**/custom*
+automl_4intelligence.py
