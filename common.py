@@ -9,10 +9,11 @@ from pytictoc import TicToc
 from sklearn.datasets import fetch_openml
 from sklearn.metrics import *
 from sklearn.model_selection import train_test_split
+from skmultilearn.problem_transform import LabelPowerset
 
 # pd.options.mode.chained_assignment = None
 
-EXEC_TIME_MINUTES = 10
+EXEC_TIME_MINUTES = 5
 EXEC_TIME_SECONDS = EXEC_TIME_MINUTES*60
 NUM_CPUS = multiprocessing.cpu_count()
 PRIME_NUMBERS = [
@@ -22,6 +23,7 @@ PRIME_NUMBERS = [
     # 127, 131, 137, 139, 149, 151, 157, 163, 167, 173,
     # 179, 181, 191, 193, 197, 199, 211, 223, 227, 229
 ]
+LABEL_POWERSET = 'ps' in get_dataset_ref()
 TIMER = TicToc()
 
 def set_random_seed(seed):
@@ -53,7 +55,7 @@ def set_random_seed(seed):
 
 def get_dataset_ref():
     dataset_ref = None
-    if len(sys.argv) != 2:
+    if len(sys.argv) < 2:
         print('usage: python common.py dataset_ref')
     else:
         try:
@@ -99,6 +101,8 @@ def load_openml(seed):
     if is_multi_label():
         for col in y.columns.values:
             y[col] = y[col].map({'FALSE': 0, 'TRUE': 1}).to_numpy()
+        if LABEL_POWERSET:
+            y = pd.Series(LabelPowerset().transform(y))
     else:
         for col in X.columns.values:
             if X[col].dtype.name == 'category':
@@ -113,7 +117,8 @@ def calculate_score(metric, y_true, y_pred, **kwargs):
 		return -1.0
 
 def collect_and_persist_results(y_test, y_pred, training_time, test_time, framework="unknown", seed=None):
-    results_folder = f'./results/{get_dataset_ref()}'
+    suffix = 'ps' if LABEL_POWERSET else ''
+    results_folder = f'./results/{get_dataset_ref()}{suffix}'
     results_filename = f'{results_folder}/automl_{framework}.json'
     if not os.path.exists(results_folder):
         os.makedirs(results_folder)
