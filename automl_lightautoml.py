@@ -20,7 +20,7 @@ if __name__ == "__main__":
             test_df = test_df.rename(columns={i:str(i) for i in test_df.columns})
 
             clf = TabularAutoML(
-                task=Task(infer_task_type(y_test), metric='accuracy'),
+                task=Task(infer_task_type(y_test), metric='f1'),
                 timeout=EXEC_TIME_SECONDS,
                 cpu_limit=NUM_CPUS,
                 reader_params = {'cv': 5, 'n_jobs': NUM_CPUS, 'random_state': SEED},

@@ -17,7 +17,7 @@ if __name__ == "__main__":
 
             clf = H2OAutoMLClassifier(
                 max_runtime_secs=EXEC_TIME_SECONDS, 
-                sort_metric='accuracy', 
+                sort_metric='auto', 
                 nfolds=5, 
                 seed=SEED
             )

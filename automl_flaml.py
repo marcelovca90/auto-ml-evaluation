@@ -18,7 +18,7 @@ if __name__ == "__main__":
             clf.fit(
                 X_train, 
                 y_train, 
-                metric="accuracy",
+                metric="f1",
                 task="classification",
                 time_budget=EXEC_TIME_SECONDS
             )

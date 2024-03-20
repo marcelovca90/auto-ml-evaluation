@@ -26,7 +26,7 @@ if __name__ == "__main__":
             )
 
             TIMER.tic()
-            best_model = clf.compare_models(budget_time=EXEC_TIME_MINUTES, n_select=1, sort='Accuracy')
+            best_model = clf.compare_models(budget_time=EXEC_TIME_MINUTES, n_select=1, sort='f1_weighted')
             training_time = TIMER.tocvalue()
 
             TIMER.tic()

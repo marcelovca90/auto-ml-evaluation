@@ -21,7 +21,7 @@ if __name__ == "__main__":
                 y_train=y_train,
                 X_test=X_test,
                 y_test=y_test,
-                optimize_metric='accuracy',
+                optimize_metric='f1_weighted',
                 budget_type='runtime',
                 total_walltime_limit=EXEC_TIME_SECONDS,
                 func_eval_time_limit_secs=EXEC_TIME_SECONDS//10
