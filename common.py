@@ -23,7 +23,7 @@ PRIME_NUMBERS = [
     # 127, 131, 137, 139, 149, 151, 157, 163, 167, 173,
     # 179, 181, 191, 193, 197, 199, 211, 223, 227, 229
 ]
-LABEL_POWERSET = 'ps' in get_dataset_ref()
+LABEL_POWERSET = False # use True when needed
 TIMER = TicToc()
 
 def set_random_seed(seed):
