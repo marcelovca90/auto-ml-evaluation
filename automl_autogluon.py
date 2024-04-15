@@ -15,7 +15,7 @@ if __name__ == "__main__":
             train_df = pd.DataFrame(X_train).assign(**{'class': pd.Series(y_train)}).dropna()
             test_df = pd.DataFrame(X_test).assign(**{'class': pd.Series(y_test)}).dropna()
 
-            clf = TabularPredictor(eval_metric='f1_weighted', label='class')
+            clf = TabularPredictor(problem_type=infer_task_type(y_test), eval_metric='f1_weighted', label='class')
 
             TIMER.tic()
             clf = clf.fit(time_limit=EXEC_TIME_SECONDS, train_data=train_df, num_cpus=NUM_CPUS)
