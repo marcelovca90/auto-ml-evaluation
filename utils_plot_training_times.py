@@ -37,7 +37,8 @@ datasets = {
     'multilabel_powerset': ['41465ps', '41468ps', '41470ps', '41471ps', '41473ps']
 }
 
-frameworks = ['4intelligence', 'AutoGluon', 'AutoKeras', 'Auto-PyTorch', 'AutoSklearn', 'EvalML', 'FLAML', 'GAMA', 'H2O', 'LightAutoML', 'PyCaret', 'TPOT']
+frameworks = ['4intelligence', 'AutoGluon', 'AutoKeras', 'Auto-PyTorch', 'AutoSklearn', 'EvalML', 'FEDOT',
+              'FLAML', 'GAMA', 'H2O', 'LightAutoML', 'mljar-supervised', 'naiveautoml', 'PyCaret', 'TPOT', 'VowpalWabbit']
 
 for scenario, dataset_refs in datasets.items():
 
@@ -77,22 +78,21 @@ for scenario, dataset_refs in datasets.items():
     positions = np.arange(len(data.keys())) / 1.25
 
     # Get colormap
-    cmap = get_cmap('Paired')
-
+    cmap = get_cmap('tab20') # Paired
     # Plotting
     fig, ax = plt.subplots(figsize=(22, 7))
     ax.yaxis.grid(True, linestyle='dashed', linewidth=0.5, alpha=0.7)  # Enable y-grid with customized properties
 
     for i, framework in enumerate(frameworks):
-        x_vals = positions + i * 0.05  # Adjust the width between bars
+        x_vals = positions + i * 0.04  # Adjust the width between bars
         color = cmap(i / len(frameworks))  # Color based on framework index
-        ax.bar(x_vals, mean_vals[:, i], width=0.05, label=framework, color=color)
+        ax.bar(x_vals, mean_vals[:, i], width=0.04, label=framework, color=color)
         ax.errorbar(x_vals, mean_vals[:, i], yerr=stdev_vals[:, i], fmt='none', capsize=5, color='dimgray')
         # Check if min_vals is non-zero before plotting the marker
         non_zero_min_vals = [val if val != 0 else np.nan for val in min_vals[:, i]]
         ax.scatter(x_vals, non_zero_min_vals, marker='*', color='red')
 
-    ax.set_xticks(positions + 0.05 * (len(frameworks) - 1) / 2)  # Set ticks at the center of each group
+    ax.set_xticks(positions + 0.04 * (len(frameworks) - 1) / 2)  # Set ticks at the center of each group
     ax.set_xticklabels([str(x).replace('ps', '') for x in data.keys()], fontsize=20)  # Increase font size for x-axis labels
     ax.set_ylim(0, np.max(y_ticks) + 120)
     ax.set_yticks(y_ticks)
