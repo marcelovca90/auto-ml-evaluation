@@ -43,6 +43,7 @@ rm -rf structured* &> /dev/null
 rm -rf results/* &> /dev/null
 rm -rf venv-* &> /dev/null
 rm *.log &> /dev/null
+find . -maxdepth 1 -type d -name "*AutoML*" | xargs rm -rf
 echo Finished cleaning files from previous executions at $(date).
 
 for id in ${datasets[@]}; do
@@ -159,6 +160,46 @@ for id in ${datasets[@]}; do
     python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn deap update_checker tqdm stopit xgboost torch tpot
     python3.8 ./automl_tpot.py $id
     pkill -f tpot
+    sleep 10
+
+    # FEDOT
+    echo ======== FEDOT ========
+    python3.8 -m venv venv-fedot
+    source ./venv-fedot/bin/activate
+    python3.8 -m pip install --upgrade pip
+    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn fedot fedot[extra]
+    python3.8 ./automl_fedot.py $id
+    pkill -f fedot
+    sleep 10
+
+    # MLJAR-supervised
+    echo ======== MLJAR-supervised ========
+    python3.8 -m venv venv-mljar
+    source ./venv-mljar/bin/activate
+    python3.8 -m pip install --upgrade pip
+    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn mljar-supervised
+    python3.8 ./automl_mljar.py $id
+    pkill -f mljar
+    sleep 10
+
+    # NaiveAutoML
+    echo ======== NaiveAutoML ========
+    python3.8 -m venv venv-naive
+    source ./venv-naive/bin/activate
+    python3.8 -m pip install --upgrade pip
+    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn naiveautoml
+    python3.8 ./automl_naive.py $id
+    pkill -f naive
+    sleep 10
+
+    # VowpalWabbit
+    echo ======== VowpalWabbit ========
+    python3.8 -m venv venv-vowpal
+    source ./venv-vowpal/bin/activate
+    python3.8 -m pip install --upgrade pip
+    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn vowpalwabbit
+    python3.8 ./automl_vowpal.py $id
+    pkill -f vowpal
     sleep 10
 
     echo Finished processing dataset $id at $(date).
