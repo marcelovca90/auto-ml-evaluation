@@ -19,7 +19,7 @@ datasets = {
 
 frameworks = [
     '4intelligence', 'autogluon', 'autokeras', 'autopytorch', 'autosklearn', 'evalml', 'fedot',
-    'flaml', 'gama', 'h2o', 'lightautoml', 'mljar', 'naive', 'pycaret', 'tpot', 'vowpal'
+    'flaml', 'gama', 'h2o', 'lightautoml', 'lightwood', 'mljar', 'naive', 'pycaret', 'tpot',
 ]
 
 def format_time(secs):

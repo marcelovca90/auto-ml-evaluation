@@ -37,8 +37,10 @@ datasets = {
     'multilabel_powerset': ['41465ps', '41468ps', '41470ps', '41471ps', '41473ps']
 }
 
-frameworks = ['4intelligence', 'AutoGluon', 'AutoKeras', 'Auto-PyTorch', 'AutoSklearn', 'EvalML', 'FEDOT',
-              'FLAML', 'GAMA', 'H2O', 'LightAutoML', 'mljar-supervised', 'naiveautoml', 'PyCaret', 'TPOT', 'VowpalWabbit']
+frameworks = [
+    '4intelligence', 'AutoGluon', 'AutoKeras', 'Auto-PyTorch', 'AutoSklearn', 'EvalML', 'FEDOT',
+    'FLAML', 'GAMA', 'H2O', 'LightAutoML', 'LightWood', 'mljar-supervised', 'naiveautoml', 'PyCaret', 'TPOT'
+]
 
 for scenario, dataset_refs in datasets.items():
 
@@ -81,26 +83,26 @@ for scenario, dataset_refs in datasets.items():
     cmap = get_cmap('tab20') # Paired
     # Plotting
     fig, ax = plt.subplots(figsize=(22, 7))
-    ax.yaxis.grid(True, linestyle='dashed', linewidth=0.5, alpha=0.7)  # Enable y-grid with customized properties
+    ax.yaxis.grid(True, linestyle='dashed', linewidth=0.5, alpha=0.7)
 
     for i, framework in enumerate(frameworks):
-        x_vals = positions + i * 0.04  # Adjust the width between bars
-        color = cmap(i / len(frameworks))  # Color based on framework index
+        x_vals = positions + i * 0.04
+        color = cmap(i / len(frameworks))
         ax.bar(x_vals, mean_vals[:, i], width=0.04, label=framework, color=color)
         ax.errorbar(x_vals, mean_vals[:, i], yerr=stdev_vals[:, i], fmt='none', capsize=5, color='dimgray')
         # Check if min_vals is non-zero before plotting the marker
         non_zero_min_vals = [val if val != 0 else np.nan for val in min_vals[:, i]]
         ax.scatter(x_vals, non_zero_min_vals, marker='*', color='red')
 
-    ax.set_xticks(positions + 0.04 * (len(frameworks) - 1) / 2)  # Set ticks at the center of each group
-    ax.set_xticklabels([str(x).replace('ps', '') for x in data.keys()], fontsize=20)  # Increase font size for x-axis labels
+    ax.set_xticks(positions + 0.04 * (len(frameworks) - 1) / 2)
+    ax.set_xticklabels([str(x).replace('ps', '') for x in data.keys()], fontsize=20)
     ax.set_ylim(0, np.max(y_ticks) + 120)
     ax.set_yticks(y_ticks)
-    ax.set_yticklabels([seconds_to_timestamp(y) for y in y_ticks], fontsize=20)  # Increase font size for x-axis labels
-    ax.set_xlabel(r'Dataset', fontsize=24)  # Increase font size for x-axis label
-    ax.set_ylabel(r'Training Time', fontsize=24)  # Increase font size for y-axis label
-    ax.legend(loc='best', bbox_to_anchor=(1, 1), fontsize=20)  # Increase font size for legend
-    # ax.set_title(r'Training Time (Min, Mean, Stdev) for each Framework and Dataset', fontsize=24)  # Increase font size for title
+    ax.set_yticklabels([seconds_to_timestamp(y) for y in y_ticks], fontsize=20)
+    ax.set_xlabel(r'Dataset', fontsize=24)
+    ax.set_ylabel(r'Training Time', fontsize=24)
+    ax.legend(loc='best', bbox_to_anchor=(1, 1), fontsize=20)
+    # ax.set_title(r'Training Time (Min, Mean, Stdev) for each Framework and Dataset', fontsize=24)
 
     plt.tight_layout()
     plt.savefig(f'{base_folder}/results/training_time_{scenario}.png')

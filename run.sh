@@ -20,7 +20,9 @@
 #   - 41471     scene                           2407x300x6
 #   - 41473     yeast                           2417x117x14
 
+# datasets=(37 23 41465)
 datasets=(37 44 1462 1479 1510 23 181 1466 40691 40975 41465 41468 41470 41471 41473)
+# datasets=(41465 41468 41470 41471 41473)
 
 mkdir /tmp/joblib &> /dev/null
 NUM_CPUS=$(nproc)
@@ -40,8 +42,8 @@ rm -rf Autogluon* &> /dev/null
 rf -rf gama_* &> /dev/null
 rm -rf mlruns* &> /dev/null
 rm -rf structured* &> /dev/null
-rm -rf results/* &> /dev/null
-rm -rf venv-* &> /dev/null
+# rm -rf results/* &> /dev/null
+# rm -rf venv-* &> /dev/null
 rm *.log &> /dev/null
 find . -maxdepth 1 -type d -name "*AutoML*" | xargs rm -rf
 echo Finished cleaning files from previous executions at $(date).
@@ -51,155 +53,171 @@ for id in ${datasets[@]}; do
     echo ======== Processing ========
     echo Started processing dataset $id at $(date).
 
-    # AutoGluon
-    echo ======== AutoGluon ========
-    python3.8 -m venv venv-autogluon
-    source ./venv-autogluon/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn torch==1.12+cpu torchvision==0.13.0+cpu torchtext==0.13.0 -f https://download.pytorch.org/whl/cpu/torch_stable.html autogluon
-    python3.8 ./automl_autogluon.py $id
-    pkill -f autogluon
-    sleep 10
+    # # AutoGluon
+    # echo ======== AutoGluon ========
+    # python3.8 -m venv venv-autogluon
+    # source ./venv-autogluon/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn torch==1.12+cpu torchvision==0.13.0+cpu torchtext==0.13.0 -f https://download.pytorch.org/whl/cpu/torch_stable.html autogluon
+    # python3.8 ./automl_autogluon.py $id
+    # pkill -f autogluon
+    # sleep 10
 
-    # AutoKeras
-    echo ======== AutoKeras ========
-    python3.8 -m venv venv-autokeras
-    source ./venv-autokeras/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn git+https://github.com/keras-team/keras-tuner.git autokeras
-    python3.8 ./automl_autokeras.py $id
-    pkill -f autokeras
-    sleep 10
+    # # AutoKeras
+    # echo ======== AutoKeras ========
+    # python3.8 -m venv venv-autokeras
+    # source ./venv-autokeras/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn git+https://github.com/keras-team/keras-tuner.git autokeras
+    # python3.8 ./automl_autokeras.py $id
+    # pkill -f autokeras
+    # sleep 10
 
-    # AutoPyTorch
-    echo ======== AutoPyTorch ========
-    python3.8 -m venv venv-autopytorch
-    source ./venv-autopytorch/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn swig torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu autoPyTorch
-    python3.8 ./automl_autopytorch.py $id
-    pkill -f autopytorch
-    sleep 10
+    # # AutoPyTorch
+    # echo ======== AutoPyTorch ========
+    # python3.8 -m venv venv-autopytorch
+    # source ./venv-autopytorch/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn swig torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cpu autoPyTorch
+    # python3.8 ./automl_autopytorch.py $id
+    # pkill -f autopytorch
+    # sleep 10
 
-    # AutoSklearn
-    echo ======== AutoSklearn ========
-    python3.8 -m venv venv-autosklearn
-    source ./venv-autosklearn/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn auto-sklearn
-    python3.8 ./automl_autosklearn.py $id
-    pkill -f autosklearn
-    sleep 10
+    # # AutoSklearn
+    # echo ======== AutoSklearn ========
+    # python3.8 -m venv venv-autosklearn
+    # source ./venv-autosklearn/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn auto-sklearn
+    # python3.8 ./automl_autosklearn.py $id
+    # pkill -f autosklearn
+    # sleep 10
 
-    # EvalML
-    echo ======== EvalML ========
-    python3.8 -m venv venv-evalml
-    source ./venv-evalml/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn evalml
-    python3.8 ./automl_evalml.py $id
-    pkill -f evalml
-    sleep 10
+    # # EvalML
+    # echo ======== EvalML ========
+    # python3.8 -m venv venv-evalml
+    # source ./venv-evalml/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn evalml
+    # python3.8 ./automl_evalml.py $id
+    # pkill -f evalml
+    # sleep 10
 
-    # FLAML
-    echo ======== FLAML ========
-    python3.8 -m venv venv-flaml
-    source ./venv-flaml/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn flaml[automl]
-    python3.8 ./automl_flaml.py $id
-    pkill -f flaml
-    sleep 10
+    # # FLAML
+    # echo ======== FLAML ========
+    # python3.8 -m venv venv-flaml
+    # source ./venv-flaml/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn flaml[automl]
+    # python3.8 ./automl_flaml.py $id
+    # pkill -f flaml
+    # sleep 10
 
-    # GAMA
-    echo ======== GAMA ========
-    python3.8 -m venv venv-gama
-    source ./venv-gama/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn gama
-    sed -i 's/ SCORERS/ _SCORERS/' ./venv-gama/lib/python3.8/site-packages/gama/utilities/metrics.py
-    python3.8 ./automl_gama.py $id
-    pkill -f gama
-    sleep 10
+    # # GAMA
+    # echo ======== GAMA ========
+    # python3.8 -m venv venv-gama
+    # source ./venv-gama/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn gama
+    # sed -i 's/ SCORERS/ _SCORERS/' ./venv-gama/lib/python3.8/site-packages/gama/utilities/metrics.py
+    # python3.8 ./automl_gama.py $id
+    # pkill -f gama
+    # sleep 10
 
-    # H2O
-    echo ======== H2O ========
-    python3.8 -m venv venv-h2o
-    source ./venv-h2o/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn requests tabulate future h2o
-    python3.8 ./automl_h2o.py $id
-    pkill -f h2o
-    sleep 10
+    # # H2O
+    # echo ======== H2O ========
+    # python3.8 -m venv venv-h2o
+    # source ./venv-h2o/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn requests tabulate future h2o
+    # python3.8 ./automl_h2o.py $id
+    # pkill -f h2o
+    # sleep 10
 
-    # LightAutoML
-    echo ======== LightAutoML ========
-    python3.8 -m venv venv-lightautoml
-    source ./venv-lightautoml/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn lightautoml
-    python3.8 ./automl_lightautoml.py $id
-    pkill -f lightautoml
-    sleep 10
+    # # LightAutoML
+    # echo ======== LightAutoML ========
+    # python3.8 -m venv venv-lightautoml
+    # source ./venv-lightautoml/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn lightautoml
+    # python3.8 ./automl_lightautoml.py $id
+    # pkill -f lightautoml
+    # sleep 10
 
-    # PyCaret
-    echo ======== PyCaret ========
-    python3.8 -m venv venv-pycaret
-    source ./venv-pycaret/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn pycaret[full]
-    python3.8 ./automl_pycaret.py $id
-    pkill -f pycaret
-    sleep 10
+    # # PyCaret
+    # echo ======== PyCaret ========
+    # python3.8 -m venv venv-pycaret
+    # source ./venv-pycaret/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn pycaret[full]
+    # python3.8 ./automl_pycaret.py $id
+    # pkill -f pycaret
+    # sleep 10
 
-    # TPOT
-    echo ======== TPOT ========
-    python3.8 -m venv venv-tpot
-    source ./venv-tpot/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn deap update_checker tqdm stopit xgboost torch tpot
-    python3.8 ./automl_tpot.py $id
-    pkill -f tpot
-    sleep 10
+    # # TPOT
+    # echo ======== TPOT ========
+    # python3.8 -m venv venv-tpot
+    # source ./venv-tpot/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn deap update_checker tqdm stopit xgboost torch tpot
+    # python3.8 ./automl_tpot.py $id
+    # pkill -f tpot
+    # sleep 10
 
-    # FEDOT
-    echo ======== FEDOT ========
-    python3.8 -m venv venv-fedot
-    source ./venv-fedot/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn fedot fedot[extra]
-    python3.8 ./automl_fedot.py $id
-    pkill -f fedot
-    sleep 10
+    # # BlobCity AutoAI
+    # echo ======== BlobCity AutoAI ========
+    # python3.8 -m venv venv-blob
+    # source ./venv-blob/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel Cython "typing-extensions<4.6.0,>=3.6.6"
+    # python3.8 -m pip install git+https://github.com/keras-team/keras-tuner.git
+    # python3.8 -m pip install scikit-learn scikit-multilearn opencv-python statsmodels IPython autokeras blobcity
+    # sed -i 's/"auto",//' venv-blob/lib/python3.8/site-packages/blobcity/config/classifier_config.py
+    # sed -i 's/"auto",//' venv-blob/lib/python3.8/site-packages/blobcity/config/regressor_config.py
+    # python3.8 ./automl_blob.py $id
+    # pkill -f blob
+    # sleep 10
 
-    # MLJAR-supervised
-    echo ======== MLJAR-supervised ========
-    python3.8 -m venv venv-mljar
-    source ./venv-mljar/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn mljar-supervised
-    python3.8 ./automl_mljar.py $id
-    pkill -f mljar
-    sleep 10
+    # # FEDOT
+    # echo ======== FEDOT ========
+    # python3.8 -m venv venv-fedot
+    # source ./venv-fedot/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn fedot fedot[extra]
+    # python3.8 ./automl_fedot.py $id
+    # pkill -f fedot
+    # sleep 10
 
-    # NaiveAutoML
-    echo ======== NaiveAutoML ========
-    python3.8 -m venv venv-naive
-    source ./venv-naive/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn naiveautoml
-    python3.8 ./automl_naive.py $id
-    pkill -f naive
-    sleep 10
+    # # MLJAR-supervised
+    # echo ======== MLJAR-supervised ========
+    # python3.8 -m venv venv-mljar
+    # source ./venv-mljar/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn mljar-supervised
+    # python3.8 ./automl_mljar.py $id
+    # pkill -f mljar
+    # sleep 10
 
-    # VowpalWabbit
-    echo ======== VowpalWabbit ========
-    python3.8 -m venv venv-vowpal
-    source ./venv-vowpal/bin/activate
-    python3.8 -m pip install --upgrade pip
-    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn vowpalwabbit
-    python3.8 ./automl_vowpal.py $id
-    pkill -f vowpal
+    # # NaiveAutoML
+    # echo ======== NaiveAutoML ========
+    # python3.8 -m venv venv-naive
+    # source ./venv-naive/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn naiveautoml
+    # python3.8 ./automl_naive.py $id
+    # pkill -f naive
+    # sleep 10
+
+    # Lightwood
+    echo ======== Lightwood ========
+    python3.8 -m venv venv-lightwood
+    source ./venv-lightwood/bin/activate
+    # python3.8 -m pip install --upgrade pip
+    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn lightwood
+    # sed -i "s/sparse=False, //" venv-blob/lib/python3.8/site-packages/lightwood/encoder/helpers.py
+    # sed -i "s/sparse=False, //" venv-blob/lib/python3.8/site-packages/lightwood/analysis/nc/calibrate.py
+    python3.8 ./automl_lightwood.py $id
+    pkill -f lightwood
     sleep 10
 
     echo Finished processing dataset $id at $(date).
