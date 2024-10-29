@@ -19,7 +19,7 @@ def seconds_to_timestamp(total_seconds):
     duration_str = "{:02}:{:02}:{:02}".format(int(hours), int(minutes), int(seconds))
     return duration_str
 
-base_folder = './' # '//wsl.localhost/Ubuntu/home/marce/git/auto-ml-comparison-2024/'
+base_folder = './'  # '//wsl.localhost/Ubuntu/home/marce/git/auto-ml-comparison-2024/'
 
 font_dirs = [f'{base_folder}/fonts']
 font_files = font_manager.findSystemFonts(fontpaths=font_dirs)
@@ -39,39 +39,45 @@ datasets = {
 
 frameworks = [
     '4intelligence', 'AutoGluon', 'AutoKeras', 'Auto-PyTorch', 'AutoSklearn', 'EvalML', 'FEDOT',
-    'FLAML', 'GAMA', 'H2O', 'LightAutoML', 'LightWood', 'mljar-supervised', 'naiveautoml', 'PyCaret', 'TPOT'
+    'FLAML', 'GAMA', 'H2O', 'LightAutoML', 'Lightwood', 'mljar-supervised', 'naiveautoml', 'PyCaret', 'TPOT'
 ]
 
 for scenario, dataset_refs in datasets.items():
-
     df, data = pd.read_excel(f'{base_folder}/results/{scenario}.xlsx', sheet_name='training_time'), {}
     for dataset_ref in dataset_refs:
         data[dataset_ref] = df[dataset_ref].fillna('00:00:00 (00:00:00 Â± 00:00:00)')
 
     pattern = r'(\d+:\d+:\d+)\s+\((\d+:\d+:\d+)\s*Â±\s*(\d+:\d+:\d+)\)'
 
-    # Extract min, mean, and standard deviation values
-    min_vals = np.array([[re.match(pattern, value).group(1) for value in data[key]] for key in data.keys()])
-    for i, min_val in enumerate(min_vals):
-        for j, duration_str in enumerate(min_val):
-            min_vals[i][j] = timestamp_to_seconds(duration_str)
-    min_vals = min_vals.astype(int)
-    print(min_vals)
+    # Extract min, mean, and standard deviation values with error handling
+    min_vals, mean_vals, stdev_vals = [], [], []
+    for key in data.keys():
+        min_row, mean_row, stdev_row = [], [], []
+        for value in data[key]:
+            match = re.match(pattern, value)
+            if match:
+                min_row.append(timestamp_to_seconds(match.group(1)))  # Min value in seconds
+                mean_row.append(timestamp_to_seconds(match.group(2))) # Mean value in seconds
+                stdev_row.append(timestamp_to_seconds(match.group(3))) # Stdev value in seconds
+            else:
+                # Append a default value (e.g., 0 seconds) if no match is found
+                min_row.append(0)
+                mean_row.append(0)
+                stdev_row.append(0)
+        min_vals.append(min_row)
+        mean_vals.append(mean_row)
+        stdev_vals.append(stdev_row)
 
-    mean_vals = np.array([[re.match(pattern, value).group(2) for value in data[key]] for key in data.keys()])
-    for i, mean_val in enumerate(mean_vals):
-        for j, duration_str in enumerate(mean_val):
-            mean_vals[i][j] = timestamp_to_seconds(duration_str)
-    mean_vals = mean_vals.astype(int)
-    print(mean_vals)
+    # Convert lists to arrays and set as integers
+    min_vals = np.array(min_vals, dtype=int)
+    mean_vals = np.array(mean_vals, dtype=int)
+    stdev_vals = np.array(stdev_vals, dtype=int)
 
-    stdev_vals = np.array([[re.match(pattern, value).group(3) for value in data[key]] for key in data.keys()])
-    for i, stdev_val in enumerate(stdev_vals):
-        for j, duration_str in enumerate(stdev_val):
-            stdev_vals[i][j] = timestamp_to_seconds(duration_str)
-    stdev_vals = stdev_vals.astype(int)
-    print(stdev_vals)
+    print("Min values:", min_vals)
+    print("Mean values:", mean_vals)
+    print("Stdev values:", stdev_vals)
 
+    # Determine upper limit and y-ticks for the plot
     upper_limit = np.ceil((np.max([min_vals, mean_vals, stdev_vals]) / 300) * 300)
     y_ticks = np.linspace(0, upper_limit, 6)
     print('upper_limit = ', upper_limit, 'y_ticks = ', y_ticks)
@@ -80,7 +86,8 @@ for scenario, dataset_refs in datasets.items():
     positions = np.arange(len(data.keys())) / 1.25
 
     # Get colormap
-    cmap = get_cmap('tab20') # Paired
+    cmap = get_cmap('tab20')  # Paired
+
     # Plotting
     fig, ax = plt.subplots(figsize=(22, 7))
     ax.yaxis.grid(True, linestyle='dashed', linewidth=0.5, alpha=0.7)
@@ -90,6 +97,7 @@ for scenario, dataset_refs in datasets.items():
         color = cmap(i / len(frameworks))
         ax.bar(x_vals, mean_vals[:, i], width=0.04, label=framework, color=color)
         ax.errorbar(x_vals, mean_vals[:, i], yerr=stdev_vals[:, i], fmt='none', capsize=5, color='dimgray')
+        
         # Check if min_vals is non-zero before plotting the marker
         non_zero_min_vals = [val if val != 0 else np.nan for val in min_vals[:, i]]
         ax.scatter(x_vals, non_zero_min_vals, marker='*', color='red')
@@ -101,9 +109,9 @@ for scenario, dataset_refs in datasets.items():
     ax.set_yticklabels([seconds_to_timestamp(y) for y in y_ticks], fontsize=20)
     ax.set_xlabel(r'Dataset', fontsize=24)
     ax.set_ylabel(r'Training Time', fontsize=24)
-    ax.legend(loc='best', bbox_to_anchor=(1, 1), fontsize=20)
+    ax.legend(loc='best', bbox_to_anchor=(1, 1), fontsize=17, title='Frameworks', title_fontsize=18)
     # ax.set_title(r'Training Time (Min, Mean, Stdev) for each Framework and Dataset', fontsize=24)
 
     plt.tight_layout()
-    plt.savefig(f'{base_folder}/results/training_time_{scenario}.png')
+    plt.savefig(f'{base_folder}/results/training_time_{scenario}.png', dpi=300)
     plt.show()

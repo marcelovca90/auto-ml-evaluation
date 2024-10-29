@@ -51,6 +51,19 @@ for scenario, dataset_refs in datasets.items():
             if os.path.exists(content_json_filename):
                 with open(content_json_filename) as file:
                     content = json.load(file)
+
+                    # Retrieve f1_score_weighted values
+                    f1_score_weighted_values = [r['f1_score_weighted'] for r in content['results']]
+
+                    # Check if all f1_score_weighted values are -1
+                    if all(score == -1 for score in f1_score_weighted_values):
+                        print(f"Discarding {content_json_filename} as all f1_score_weighted values are -1.")
+                        result_dict[scenario][dataset_ref][framework]['f1_score_weighted'] = None
+                        result_dict[scenario][dataset_ref][framework]['training_time'] = None
+                        result_dict[scenario][dataset_ref][framework]['test_time'] = None
+                        result_dict[scenario][dataset_ref][framework]['missing_runs'] = None
+                        result_dict[scenario][dataset_ref][framework]['best_seed'] = None
+                        continue  # Skip further processing for this file
                     
                     f1_score_weighted_values = [r['f1_score_weighted'] for r in content['results']]
                     f1_score_weighted_min = np.min(f1_score_weighted_values)
