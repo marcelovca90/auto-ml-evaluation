@@ -2,9 +2,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import re
+import warnings
 from datetime import datetime, timedelta
-from matplotlib import font_manager
-from matplotlib.cm import get_cmap
+from matplotlib import colormaps, font_manager
+from utils_consolidator import PLOT_COLORS
+
+warnings.filterwarnings("ignore", message=".*Matplotlib is currently using agg.*")
+warnings.filterwarnings("ignore", message=".*FixedFormatter.*")
 
 def timestamp_to_seconds(duration_str):
     time_object = datetime.strptime(duration_str, '%H:%M:%S')
@@ -21,6 +25,7 @@ def seconds_to_timestamp(total_seconds):
 
 base_folder = './'  # '//wsl.localhost/Ubuntu/home/marce/git/auto-ml-comparison-2024/'
 
+# sudo apt-get install fonts-cmu
 font_dirs = [f'{base_folder}/fonts']
 font_files = font_manager.findSystemFonts(fontpaths=font_dirs)
 for font_file in font_files:
@@ -28,19 +33,27 @@ for font_file in font_files:
     prop = font_manager.FontProperties(fname=font_file)
     print(font_file, prop.get_name())
 
-plt.rcParams['font.family'] = 'CMU Serif'
+plt.rcParams['font.family'] = ['CMU Serif', 'DejaVu Sans']
+plt.rcParams['text.usetex'] = False
 
 datasets = {
-    'binary': [37, 44, 1462, 1479, 1510],
-    'multiclass': [23, 181, 1466, 40691, 40975],
-    'multilabel_native': [41465, 41468, 41470, 41471, 41473],
-    'multilabel_powerset': ['41465ps', '41468ps', '41470ps', '41471ps', '41473ps']
+    'binary': [31, 37, 44, 1462, 1479, 1510, 40945],
+    'multiclass': [23, 36, 54, 181, 1466, 40691, 40975],
+    'multilabel_native': [285, 41464, 41465, 41468, 41470, 41471, 41473],
+    'multilabel_powerset': ['285ps', '41464ps', '41465ps', '41468ps', '41470ps', '41471ps', '41473ps']
 }
 
 frameworks = [
     '4intelligence', 'AutoGluon', 'AutoKeras', 'Auto-PyTorch', 'AutoSklearn', 'EvalML', 'FEDOT',
-    'FLAML', 'GAMA', 'H2O', 'LightAutoML', 'Lightwood', 'mljar-supervised', 'naiveautoml', 'PyCaret', 'TPOT'
+    'FLAML', 'GAMA', 'H2O', 'LightAutoML', 'Lightwood', 'mljar-supervised', 'NaiveAutoML', 'PyCaret', 'TPOT'
 ]
+
+y_ticks = {
+    'binary': 120 * np.array([0, 1, 2, 3, 4]),
+    'multiclass': 150 * np.array([0, 1, 2, 3, 4]),
+    'multilabel_native': 210 * np.array([0, 1, 2, 3, 4]),
+    'multilabel_powerset': 540 * np.array([0, 1, 2, 3, 4])
+}
 
 for scenario, dataset_refs in datasets.items():
     df, data = pd.read_excel(f'{base_folder}/results/{scenario}.xlsx', sheet_name='training_time'), {}
@@ -77,25 +90,25 @@ for scenario, dataset_refs in datasets.items():
     print("Mean values:", mean_vals)
     print("Stdev values:", stdev_vals)
 
-    # Determine upper limit and y-ticks for the plot
-    upper_limit = np.ceil((np.max([min_vals, mean_vals, stdev_vals]) / 300) * 300)
-    y_ticks = np.linspace(0, upper_limit, 6)
-    print('upper_limit = ', upper_limit, 'y_ticks = ', y_ticks)
+    # # Determine upper limit and y-ticks for the plot
+    upper_limit = np.ceil(np.max([mean_vals + stdev_vals]) / 150) * 150
+    upper_limit = np.ceil(upper_limit / 150) * 150  # Round up to the nearest multiple of 300
+    scenario_y_ticks = y_ticks[scenario] # np.linspace(0, upper_limit, 6)
+    print('upper_limit = ', upper_limit, 'y_ticks = ', scenario_y_ticks)
 
     # Set up positions for each bar
     positions = np.arange(len(data.keys())) / 1.25
-
-    # Get colormap
-    cmap = get_cmap('tab20')  # Paired
 
     # Plotting
     fig, ax = plt.subplots(figsize=(22, 7))
     ax.yaxis.grid(True, linestyle='dashed', linewidth=0.5, alpha=0.7)
 
+    # Fixed line at 300 seconds
+    plt.axhline(y=300, color='red', linestyle='dashdot', linewidth=0.5, alpha=0.7)
+
     for i, framework in enumerate(frameworks):
         x_vals = positions + i * 0.04
-        color = cmap(i / len(frameworks))
-        ax.bar(x_vals, mean_vals[:, i], width=0.04, label=framework, color=color)
+        ax.bar(x_vals, mean_vals[:, i], width=0.04, label=framework, color=PLOT_COLORS[i])
         ax.errorbar(x_vals, mean_vals[:, i], yerr=stdev_vals[:, i], fmt='none', capsize=5, color='dimgray')
         
         # Check if min_vals is non-zero before plotting the marker
@@ -104,13 +117,12 @@ for scenario, dataset_refs in datasets.items():
 
     ax.set_xticks(positions + 0.04 * (len(frameworks) - 1) / 2)
     ax.set_xticklabels([str(x).replace('ps', '') for x in data.keys()], fontsize=20)
-    ax.set_ylim(0, np.max(y_ticks) + 120)
-    ax.set_yticks(y_ticks)
-    ax.set_yticklabels([seconds_to_timestamp(y) for y in y_ticks], fontsize=20)
+    ax.set_ylim(0, np.max(scenario_y_ticks) + scenario_y_ticks[1] / 2)
+    ax.set_yticks(scenario_y_ticks)
+    ax.set_yticklabels([seconds_to_timestamp(y) for y in scenario_y_ticks], fontsize=20)
     ax.set_xlabel(r'Dataset', fontsize=24)
     ax.set_ylabel(r'Training Time', fontsize=24)
     ax.legend(loc='best', bbox_to_anchor=(1, 1), fontsize=17, title='Frameworks', title_fontsize=18)
-    # ax.set_title(r'Training Time (Min, Mean, Stdev) for each Framework and Dataset', fontsize=24)
 
     plt.tight_layout()
     plt.savefig(f'{base_folder}/results/training_time_{scenario}.png', dpi=300)

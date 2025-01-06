@@ -13,14 +13,16 @@ from skmultilearn.problem_transform import LabelPowerset
 
 # pd.options.mode.chained_assignment = None
 
+FORCE_DATASET_REF = None
 EXEC_TIME_MINUTES = 5
 EXEC_TIME_SECONDS = EXEC_TIME_MINUTES*60
+MAX_MEMORY_MB = 32*1024
 NUM_CPUS = multiprocessing.cpu_count()
 PRIME_NUMBERS = [
     2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
     31, 37, 41, 43, 47, 53, 59, 61, 67, 71
 ]
-LABEL_POWERSET = False # use True when needed
+LABEL_POWERSET = True # use True when needed
 TIMER = TicToc()
 
 def set_random_seed(seed):
@@ -51,15 +53,17 @@ def set_random_seed(seed):
         print(f"Error importing a necessary module; skipping seed: {e}")
 
 def get_dataset_ref():
-    dataset_ref = None
-    if len(sys.argv) < 2:
+    if FORCE_DATASET_REF:
+        return FORCE_DATASET_REF
+    elif len(sys.argv) < 2:
         print('usage: python common.py dataset_ref')
     else:
+        dataset_ref = None
         try:
             dataset_ref = int(sys.argv[1])
         except:
             dataset_ref = str(sys.argv[1])
-    return dataset_ref
+        return dataset_ref
 
 def infer_task_type(y_test):
     num_classes = len(set(y_test))
@@ -72,7 +76,7 @@ def infer_task_type(y_test):
     return task_type
 
 def is_multi_label():
-    return get_dataset_ref() in [41465, 41468, 41470, 41471, 41473]
+    return get_dataset_ref() in [285, 41464, 41465, 41468, 41470, 41471, 41473]
 
 def load_data_delegate(seed):
     if isinstance(get_dataset_ref(), int):
@@ -93,18 +97,42 @@ def load_csv():
     return dfs[0], dfs[1], dfs[2], dfs[3]
 
 def load_openml(seed):
-    dataset = fetch_openml(data_id=get_dataset_ref(), return_X_y=False)
+    dataset = fetch_openml(data_id=get_dataset_ref(), return_X_y=False, parser='auto')
     X, y = dataset.data.copy(deep=True), dataset.target.copy(deep=True)
+
+    # https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=9321731
+    # https://github.com/mrapp-ke/Boomer-Datasets/raw/refs/heads/main/flags.arff
+    if get_dataset_ref() == 285: # flags
+        df = pd.concat([X, y], axis='columns')
+        label_columns = [
+            'crescent', 'triangle', 'icon', 'animate', 'text', 'red',
+            'green', 'blue', 'gold', 'white', 'black', 'orange'
+        ]
+        y = df[label_columns].astype(int)  # Select only label columns
+        for col in y.columns.values:
+            y[col] = y[col].map({0: 'FALSE', 1: 'TRUE'})
+        X = df.drop(columns=label_columns).infer_objects()  # Drop label columns to get remaining ones
+        for col in X.columns:
+            if col not in ['mainhue', 'topleft', 'botright']:
+                X[col] = X[col].astype(float)
+        assert df.shape[0] == X.shape[0] # rows
+        assert df.shape[0] == y.shape[0] # rows
+        assert df.shape[1] == X.shape[1] + y.shape[1] # columns
+
+    # handle categorical features
+    for col in X.columns.values:
+        if X[col].dtype.name == 'category':
+            X.loc[:, col] = pd.Series(pd.factorize(X[col])[0])
+
+    # handle target(s) column(s)
     if is_multi_label():
         for col in y.columns.values:
             y[col] = y[col].map({'FALSE': 0, 'TRUE': 1}).to_numpy()
         if LABEL_POWERSET:
-            y = pd.Series(LabelPowerset().transform(y))
+            y = pd.Series(LabelPowerset().transform(y), name="class")
     else:
-        for col in X.columns.values:
-            if X[col].dtype.name == 'category':
-                X.loc[:, col] = pd.Series(pd.factorize(X[col])[0])
-        y = pd.Series(pd.factorize(y)[0])
+        y = pd.Series(pd.factorize(y)[0], name="class")
+
     return train_test_split(X, y, test_size=0.2, random_state=seed)
 
 def calculate_score(metric, y_true, y_pred, **kwargs):

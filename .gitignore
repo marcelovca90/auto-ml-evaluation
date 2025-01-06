@@ -129,6 +129,7 @@ dmypy.json
 .pyre/
 
 # Custom
+**/debug
 **/venv*
 **/structured*
 **/Autogluon*

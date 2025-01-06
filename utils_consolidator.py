@@ -1,3 +1,4 @@
+import distinctipy
 import json
 import numpy as np
 import os
@@ -11,16 +12,20 @@ metric = 'f1_score_weighted'
 base_folder = './' # '//wsl.localhost/Ubuntu/home/marce/git/auto-ml-comparison-2024/'
 
 datasets = {
-    'binary': [37, 44, 1462, 1479, 1510],
-    'multiclass': [23, 181, 1466, 40691, 40975],
-    'multilabel_native': [41465, 41468, 41470, 41471, 41473],
-    'multilabel_powerset': ['41465ps', '41468ps', '41470ps', '41471ps', '41473ps']
+    'binary': [31, 37, 44, 1462, 1479, 1510, 40945],
+    'multiclass': [23, 36, 54, 181, 1466, 40691, 40975],
+    'multilabel_native': [285, 41464, 41465, 41468, 41470, 41471, 41473],
+    'multilabel_powerset': ['285ps', '41464ps', '41465ps', '41468ps', '41470ps', '41471ps', '41473ps']
 }
 
 frameworks = [
     '4intelligence', 'autogluon', 'autokeras', 'autopytorch', 'autosklearn', 'evalml', 'fedot',
     'flaml', 'gama', 'h2o', 'lightautoml', 'lightwood', 'mljar', 'naive', 'pycaret', 'tpot',
 ]
+
+PLOT_COLORS = distinctipy.get_colors(
+    n_colors=len(frameworks), n_attempts=1_000_000, colorblind_type="Deuteranomaly", exclude_colors=[(0,0,0), (1,1,1), (1,0,0)], rng=42
+)
 
 def format_time(secs):
     return time.strftime("%H:%M:%S", time.gmtime(secs))

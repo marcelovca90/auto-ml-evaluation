@@ -1,0 +1,63 @@
+{
+    "id": 285,
+    "framework": "fedot",
+    "results": [
+        {
+            "seed": "19",
+            "accuracy_score": 0.1794871794871795,
+            "average_precision_score": 0.447720770240635,
+            "balanced_accuracy_score": -1.0,
+            "cohen_kappa_score": -1.0,
+            "f1_score_macro": 0.39463805415864356,
+            "f1_score_micro": 0.6847457627118645,
+            "f1_score_weighted": 0.6159546763679322,
+            "matthews_corrcoef": -1.0,
+            "precision_score": -1.0,
+            "recall_score": -1.0,
+            "roc_auc_score": 0.6132095380861827,
+            "coverage_error": 9.615384615384615,
+            "label_ranking_average_precision_score": 0.6994200244200243,
+            "label_ranking_loss": 0.39706366164699497,
+            "training_time": 299.6259933523834,
+            "test_time": 0.014838711358606815
+        },
+        {
+            "seed": "23",
+            "accuracy_score": 0.41025641025641024,
+            "average_precision_score": 0.46095596666932054,
+            "balanced_accuracy_score": -1.0,
+            "cohen_kappa_score": -1.0,
+            "f1_score_macro": 0.48546880374956997,
+            "f1_score_micro": 0.7758007117437722,
+            "f1_score_weighted": 0.7390871732615181,
+            "matthews_corrcoef": -1.0,
+            "precision_score": -1.0,
+            "recall_score": -1.0,
+            "roc_auc_score": -1.0,
+            "coverage_error": 7.9743589743589745,
+            "label_ranking_average_precision_score": 0.7622972629222629,
+            "label_ranking_loss": 0.2828949599782933,
+            "training_time": 301.19859502930194,
+            "test_time": 0.03331942576915026
+        },
+        {
+            "seed": "71",
+            "accuracy_score": 0.1282051282051282,
+            "average_precision_score": 0.41875432669421325,
+            "balanced_accuracy_score": -1.0,
+            "cohen_kappa_score": -1.0,
+            "f1_score_macro": 0.40006080015408374,
+            "f1_score_micro": 0.7109634551495017,
+            "f1_score_weighted": 0.6288826472843099,
+            "matthews_corrcoef": -1.0,
+            "precision_score": -1.0,
+            "recall_score": -1.0,
+            "roc_auc_score": 0.6059148910588913,
+            "coverage_error": 8.974358974358974,
+            "label_ranking_average_precision_score": 0.6714616402116402,
+            "label_ranking_loss": 0.355703247369914,
+            "training_time": 299.63845352921635,
+            "test_time": 0.026518923230469227
+        }
+    ]
+}

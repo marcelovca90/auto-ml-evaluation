@@ -1,0 +1,63 @@
+{
+    "id": 40945,
+    "framework": "evalml",
+    "results": [
+        {
+            "seed": "59",
+            "accuracy_score": 0.9541984732824428,
+            "average_precision_score": 0.9354969399290078,
+            "balanced_accuracy_score": 0.9455939629990263,
+            "cohen_kappa_score": 0.9030587074494326,
+            "f1_score_macro": 0.9514814814814816,
+            "f1_score_micro": 0.9541984732824428,
+            "f1_score_weighted": 0.9538478936952219,
+            "matthews_corrcoef": 0.904950546292258,
+            "precision_score": 0.9397590361445783,
+            "recall_score": 0.9873417721518988,
+            "roc_auc_score": 0.9455939629990263,
+            "coverage_error": -1.0,
+            "label_ranking_average_precision_score": -1.0,
+            "label_ranking_loss": -1.0,
+            "training_time": 300.745211690999,
+            "test_time": 0.06739568999910261
+        },
+        {
+            "seed": "61",
+            "accuracy_score": 0.9541984732824428,
+            "average_precision_score": 0.938409555556447,
+            "balanced_accuracy_score": 0.9423930021868167,
+            "cohen_kappa_score": 0.9000826288692557,
+            "f1_score_macro": 0.9499904561939302,
+            "f1_score_micro": 0.9541984732824428,
+            "f1_score_weighted": 0.9537555241152309,
+            "matthews_corrcoef": 0.9020861783332559,
+            "precision_score": 0.9421965317919075,
+            "recall_score": 0.9878787878787879,
+            "roc_auc_score": 0.9423930021868167,
+            "coverage_error": -1.0,
+            "label_ranking_average_precision_score": -1.0,
+            "label_ranking_loss": -1.0,
+            "training_time": 302.027839123999,
+            "test_time": 0.11640889399859589
+        },
+        {
+            "seed": "67",
+            "accuracy_score": 0.9351145038167938,
+            "average_precision_score": 0.9152671755725191,
+            "balanced_accuracy_score": 0.9237745098039216,
+            "cohen_kappa_score": 0.8613238682358801,
+            "f1_score_macro": 0.9305743901488582,
+            "f1_score_micro": 0.9351145038167938,
+            "f1_score_weighted": 0.934504637801698,
+            "matthews_corrcoef": 0.8636545720963995,
+            "precision_score": 0.9230769230769231,
+            "recall_score": 0.975,
+            "roc_auc_score": 0.9237745098039216,
+            "coverage_error": -1.0,
+            "label_ranking_average_precision_score": -1.0,
+            "label_ranking_loss": -1.0,
+            "training_time": 301.1629029050091,
+            "test_time": 0.06466672699025366
+        }
+    ]
+}

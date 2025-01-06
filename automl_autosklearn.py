@@ -18,7 +18,8 @@ if __name__ == "__main__":
                 resampling_strategy="cv",
                 resampling_strategy_arguments={"folds": 5},
                 n_jobs=NUM_CPUS,
-                seed=SEED
+                seed=SEED,
+                memory_limit=MAX_MEMORY_MB
             )
 
             TIMER.tic()

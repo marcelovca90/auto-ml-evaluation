@@ -15,8 +15,8 @@ if __name__ == "__main__":
             set_random_seed(SEED)
 
             X_train, X_test, y_train, y_test = load_data_delegate(SEED)
-            train_df = pd.DataFrame(X_train).assign(**{'class': pd.Series(y_train)}).dropna()
-            test_df = pd.DataFrame(X_test).assign(**{'class': pd.Series(y_test)}).dropna()
+            train_df = pd.DataFrame(X_train).assign(**{'class': pd.Series(y_train)})
+            test_df = pd.DataFrame(X_test).assign(**{'class': pd.Series(y_test)})
 
             problem_def = ProblemDefinition.from_dict({
                 'target': 'class', 'time_aim': EXEC_TIME_SECONDS, 

@@ -2,11 +2,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import re
+import warnings
 from matplotlib import font_manager
-from matplotlib.cm import get_cmap
+from utils_consolidator import PLOT_COLORS
+
+warnings.filterwarnings("ignore", message=".*Matplotlib is currently using agg.*")
+warnings.filterwarnings("ignore", message=".*FixedFormatter.*")
 
 base_folder = './'  # '//wsl.localhost/Ubuntu/home/marce/git/auto-ml-comparison-2024/'
 
+# sudo apt-get install fonts-cmu
 font_dirs = [f'{base_folder}/fonts']
 font_files = font_manager.findSystemFonts(fontpaths=font_dirs)
 for font_file in font_files:
@@ -14,18 +19,19 @@ for font_file in font_files:
     prop = font_manager.FontProperties(fname=font_file)
     print(font_file, prop.get_name())
 
-plt.rcParams['font.family'] = 'CMU Serif'
+plt.rcParams['font.family'] = ['CMU Serif', 'DejaVu Sans']
+plt.rcParams['text.usetex'] = False
 
 datasets = {
-    'binary': [37, 44, 1462, 1479, 1510],
-    'multiclass': [23, 181, 1466, 40691, 40975],
-    'multilabel_native': [41465, 41468, 41470, 41471, 41473],
-    'multilabel_powerset': ['41465ps', '41468ps', '41470ps', '41471ps', '41473ps']
+    'binary': [31, 37, 44, 1462, 1479, 1510, 40945],
+    'multiclass': [23, 36, 54, 181, 1466, 40691, 40975],
+    'multilabel_native': [285, 41464, 41465, 41468, 41470, 41471, 41473],
+    'multilabel_powerset': ['285ps', '41464ps', '41465ps', '41468ps', '41470ps', '41471ps', '41473ps']
 }
 
 frameworks = [
     '4intelligence', 'AutoGluon', 'AutoKeras', 'Auto-PyTorch', 'AutoSklearn', 'EvalML', 'FEDOT',
-    'FLAML', 'GAMA', 'H2O', 'LightAutoML', 'Lightwood', 'mljar-supervised', 'naiveautoml', 'PyCaret', 'TPOT'
+    'FLAML', 'GAMA', 'H2O', 'LightAutoML', 'Lightwood', 'mljar-supervised', 'NaiveAutoML', 'PyCaret', 'TPOT'
 ]
 
 for scenario, dataset_refs in datasets.items():
@@ -62,17 +68,13 @@ for scenario, dataset_refs in datasets.items():
     # Set up positions for each bar
     positions = np.arange(len(data.keys())) / 1.25
 
-    # Get colormap
-    cmap = get_cmap('tab20')  # Paired
-
     # Plotting
     fig, ax = plt.subplots(figsize=(22, 7))
     ax.yaxis.grid(True, linestyle='dashed', linewidth=0.5, alpha=0.7)
 
     for i, framework in enumerate(frameworks):
         x_vals = positions + i * 0.04
-        color = cmap(i / len(frameworks))
-        ax.bar(x_vals, mean_vals[:, i], width=0.04, label=framework, color=color)
+        ax.bar(x_vals, mean_vals[:, i], width=0.04, label=framework, color=PLOT_COLORS[i])
         ax.errorbar(x_vals, mean_vals[:, i], yerr=stdev_vals[:, i], fmt='none', capsize=5, color='dimgray')
         
         # Check if max_vals is non-zero before plotting the marker
@@ -84,9 +86,8 @@ for scenario, dataset_refs in datasets.items():
     ax.set_ylim(0., 1.1)
     ax.set_yticklabels([0., 0.2, 0.4, 0.6, 0.8, 1.], fontsize=20)
     ax.set_xlabel(r'Dataset', fontsize=24)
-    ax.set_ylabel(r'$F_{1}$ Score', fontsize=24)
+    ax.set_ylabel(r'Weighted $F_{1}$ Score', fontsize=24)
     ax.legend(loc='best', bbox_to_anchor=(1, 1), fontsize=17, title='Frameworks', title_fontsize=18)
-    # ax.set_title(r'$F_{1}$ Score (Max, Mean, Stdev) for each Framework and Dataset', fontsize=24)
 
     plt.tight_layout()
     plt.savefig(f'{base_folder}/results/f1_score_{scenario}.png', dpi=300)

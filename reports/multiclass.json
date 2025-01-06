@@ -1,0 +1,79 @@
+[
+    {
+        "type": "multiclass",
+        "id": "23",
+        "name": "cmc",
+        "data_type": "Mixed",
+        "n_samples": 1473,
+        "n_features": 9,
+        "n_classes": 3,
+        "complexity": 0.018,
+        "latex_str": "23 & cmc & Mixed & 1473 & 9 & 3 & 0.018"
+    },
+    {
+        "type": "multiclass",
+        "id": "36",
+        "name": "segment",
+        "data_type": "Mixed",
+        "n_samples": 2310,
+        "n_features": 19,
+        "n_classes": 7,
+        "complexity": 0.058,
+        "latex_str": "36 & segment & Mixed & 2310 & 19 & 7 & 0.058"
+    },
+    {
+        "type": "multiclass",
+        "id": "54",
+        "name": "vehicle",
+        "data_type": "Quantitative",
+        "n_samples": 846,
+        "n_features": 18,
+        "n_classes": 4,
+        "complexity": 0.085,
+        "latex_str": "54 & vehicle & Quantitative & 846 & 18 & 4 & 0.085"
+    },
+    {
+        "type": "multiclass",
+        "id": "181",
+        "name": "yeast",
+        "data_type": "Mixed",
+        "n_samples": 1484,
+        "n_features": 8,
+        "n_classes": 10,
+        "complexity": 0.054,
+        "latex_str": "181 & yeast & Mixed & 1484 & 8 & 10 & 0.054"
+    },
+    {
+        "type": "multiclass",
+        "id": "1466",
+        "name": "cardiotocography",
+        "data_type": "Mixed",
+        "n_samples": 2126,
+        "n_features": 35,
+        "n_classes": 10,
+        "complexity": 0.165,
+        "latex_str": "1466 & cardiotocography & Mixed & 2126 & 35 & 10 & 0.165"
+    },
+    {
+        "type": "multiclass",
+        "id": "40691",
+        "name": "wine-quality-red",
+        "data_type": "Quantitative",
+        "n_samples": 1599,
+        "n_features": 11,
+        "n_classes": 6,
+        "complexity": 0.041,
+        "latex_str": "40691 & wine-quality-red & Quantitative & 1599 & 11 & 6 & 0.041"
+    },
+    {
+        "type": "multiclass",
+        "id": "40975",
+        "name": "car",
+        "data_type": "Qualitative",
+        "n_samples": 1728,
+        "n_features": 6,
+        "n_classes": 4,
+        "complexity": 0.014,
+        "latex_str": "40975 & car & Qualitative & 1728 & 6 & 4 & 0.014"
+    }
+]

@@ -1,1 +1,126 @@
-{"id": 41465, "framework": "4intelligence", "results": [{"seed": 2, "f1_score_weighted": 0.3163908759520909, "training_time": 297.3185816980549, "test_time": 6.831756066909293}, {"seed": 3, "f1_score_weighted": 0.326252542222112, "training_time": 310.2287557889649, "test_time": 2.9504242569964845}, {"seed": 5, "f1_score_weighted": 0.3163908759520909, "training_time": 340.5056624260178, "test_time": 5.157030317030149}, {"seed": 7, "f1_score_weighted": 0.3264473558839499, "training_time": 291.5480524509476, "test_time": 12.472104413813213}, {"seed": 11, "f1_score_weighted": 0.3224389865225885, "training_time": 441.78990479095955, "test_time": 2.121396786023979}, {"seed": 13, "f1_score_weighted": 0.3061726884871409, "training_time": 314.2053772490908, "test_time": 5.300283438918996}, {"seed": 17, "f1_score_weighted": 0.3199600837353755, "training_time": 310.46117058501113, "test_time": 1.7849644379894016}, {"seed": 19, "f1_score_weighted": 0.3192921297810561, "training_time": 420.54739966399217, "test_time": 4.71294688382477}, {"seed": 23, "f1_score_weighted": 0.3163908759520909, "training_time": 302.0370197620359, "test_time": 3.619236229962553}, {"seed": 29, "f1_score_weighted": 0.3270415308862721, "training_time": 314.8110826479824, "test_time": 3.395909749000566}, {"seed": 31, "f1_score_weighted": 0.3244995172573455, "training_time": 379.5603051559592, "test_time": 2.236793945994577}, {"seed": 37, "f1_score_weighted": 0.3199600837353755, "training_time": 439.059120991049, "test_time": 1.7781377080100356}, {"seed": 41, "f1_score_weighted": 0.3137179913906127, "training_time": 325.11376838006254, "test_time": 2.9991898370790295}, {"seed": 43, "f1_score_weighted": 0.3176871068350525, "training_time": 324.50601595803164, "test_time": 3.6306715191167314}, {"seed": 47, "f1_score_weighted": 0.3157943496257321, "training_time": 366.2167691351642, "test_time": 5.9397580869845115}, {"seed": 53, "f1_score_weighted": 0.3234045456444948, "training_time": 292.9630287629843, "test_time": 9.348095120847574}, {"seed": 59, "f1_score_weighted": 0.3258088688802044, "training_time": 296.1461301420204, "test_time": 3.757827900990378}, {"seed": 61, "f1_score_weighted": 0.3224389865225885, "training_time": 290.9994672759931, "test_time": 8.2720467899926}, {"seed": 67, "f1_score_weighted": 0.3244995172573455, "training_time": 287.58481968101114, "test_time": 10.381262311901082}, {"seed": 71, "f1_score_weighted": 0.3270415308862721, "training_time": 309.63981084208353, "test_time": 4.237259106041165}]}
+{
+    "id": 41465,
+    "framework": "4intelligence",
+    "results": [
+        {
+            "seed": 2,
+            "f1_score_weighted": 0.3163908759520909,
+            "training_time": 297.3185816980549,
+            "test_time": 6.831756066909293
+        },
+        {
+            "seed": 3,
+            "f1_score_weighted": 0.326252542222112,
+            "training_time": 310.2287557889649,
+            "test_time": 2.9504242569964845
+        },
+        {
+            "seed": 5,
+            "f1_score_weighted": 0.3163908759520909,
+            "training_time": 340.5056624260178,
+            "test_time": 5.157030317030149
+        },
+        {
+            "seed": 7,
+            "f1_score_weighted": 0.3264473558839499,
+            "training_time": 291.5480524509476,
+            "test_time": 12.472104413813213
+        },
+        {
+            "seed": 11,
+            "f1_score_weighted": 0.3224389865225885,
+            "training_time": 441.78990479095955,
+            "test_time": 2.121396786023979
+        },
+        {
+            "seed": 13,
+            "f1_score_weighted": 0.3061726884871409,
+            "training_time": 314.2053772490908,
+            "test_time": 5.300283438918996
+        },
+        {
+            "seed": 17,
+            "f1_score_weighted": 0.3199600837353755,
+            "training_time": 310.46117058501113,
+            "test_time": 1.7849644379894016
+        },
+        {
+            "seed": 19,
+            "f1_score_weighted": 0.3192921297810561,
+            "training_time": 420.54739966399217,
+            "test_time": 4.71294688382477
+        },
+        {
+            "seed": 23,
+            "f1_score_weighted": 0.3163908759520909,
+            "training_time": 302.0370197620359,
+            "test_time": 3.619236229962553
+        },
+        {
+            "seed": 29,
+            "f1_score_weighted": 0.3270415308862721,
+            "training_time": 314.8110826479824,
+            "test_time": 3.395909749000566
+        },
+        {
+            "seed": 31,
+            "f1_score_weighted": 0.3244995172573455,
+            "training_time": 379.5603051559592,
+            "test_time": 2.236793945994577
+        },
+        {
+            "seed": 37,
+            "f1_score_weighted": 0.3199600837353755,
+            "training_time": 439.059120991049,
+            "test_time": 1.7781377080100356
+        },
+        {
+            "seed": 41,
+            "f1_score_weighted": 0.3137179913906127,
+            "training_time": 325.11376838006254,
+            "test_time": 2.9991898370790295
+        },
+        {
+            "seed": 43,
+            "f1_score_weighted": 0.3176871068350525,
+            "training_time": 324.50601595803164,
+            "test_time": 3.6306715191167314
+        },
+        {
+            "seed": 47,
+            "f1_score_weighted": 0.3157943496257321,
+            "training_time": 366.2167691351642,
+            "test_time": 5.9397580869845115
+        },
+        {
+            "seed": 53,
+            "f1_score_weighted": 0.3234045456444948,
+            "training_time": 292.9630287629843,
+            "test_time": 9.348095120847574
+        },
+        {
+            "seed": 59,
+            "f1_score_weighted": 0.3258088688802044,
+            "training_time": 296.1461301420204,
+            "test_time": 3.757827900990378
+        },
+        {
+            "seed": 61,
+            "f1_score_weighted": 0.3224389865225885,
+            "training_time": 290.9994672759931,
+            "test_time": 8.2720467899926
+        },
+        {
+            "seed": 67,
+            "f1_score_weighted": 0.3244995172573455,
+            "training_time": 287.58481968101114,
+            "test_time": 10.381262311901082
+        },
+        {
+            "seed": 71,
+            "f1_score_weighted": 0.3270415308862721,
+            "training_time": 309.63981084208353,
+            "test_time": 4.237259106041165
+        }
+    ]
+}

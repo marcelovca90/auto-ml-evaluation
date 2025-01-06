@@ -1,0 +1,86 @@
+[
+    {
+        "type": "multilabel",
+        "id": "285",
+        "name": "flags",
+        "data_type": "Mixed",
+        "n_samples": 194,
+        "n_features": 17,
+        "n_classes": 12,
+        "n_classes_powerset": 103,
+        "complexity": 4.336,
+        "latex_str": "285 & flags & Mixed & 194 & 17 & 12 (103) & 4.336"
+    },
+    {
+        "type": "multilabel",
+        "id": "41464",
+        "name": "birds",
+        "data_type": "Mixed",
+        "n_samples": 645,
+        "n_features": 260,
+        "n_classes": 19,
+        "n_classes_powerset": 133,
+        "complexity": 7.766,
+        "latex_str": "41464 & birds & Mixed & 645 & 260 & 19 (133) & 7.766"
+    },
+    {
+        "type": "multilabel",
+        "id": "41465",
+        "name": "emotions",
+        "data_type": "Mixed",
+        "n_samples": 593,
+        "n_features": 72,
+        "n_classes": 6,
+        "n_classes_powerset": 27,
+        "complexity": 1.361,
+        "latex_str": "41465 & emotions & Mixed & 593 & 72 & 6 (27) & 1.361"
+    },
+    {
+        "type": "multilabel",
+        "id": "41468",
+        "name": "image",
+        "data_type": "Quantitative",
+        "n_samples": 2000,
+        "n_features": 135,
+        "n_classes": 5,
+        "n_classes_powerset": 20,
+        "complexity": 0.417,
+        "latex_str": "41468 & image & Quantitative & 2000 & 135 & 5 (20) & 0.417"
+    },
+    {
+        "type": "multilabel",
+        "id": "41470",
+        "name": "reuters",
+        "data_type": "Mixed",
+        "n_samples": 2000,
+        "n_features": 243,
+        "n_classes": 7,
+        "n_classes_powerset": 25,
+        "complexity": 0.981,
+        "latex_str": "41470 & reuters & Mixed & 2000 & 243 & 7 (25) & 0.981"
+    },
+    {
+        "type": "multilabel",
+        "id": "41471",
+        "name": "scene",
+        "data_type": "Quantitative",
+        "n_samples": 2407,
+        "n_features": 294,
+        "n_classes": 6,
+        "n_classes_powerset": 15,
+        "complexity": 0.787,
+        "latex_str": "41471 & scene & Quantitative & 2407 & 294 & 6 (15) & 0.787"
+    },
+    {
+        "type": "multilabel",
+        "id": "41473",
+        "name": "yeast",
+        "data_type": "Quantitative",
+        "n_samples": 2417,
+        "n_features": 103,
+        "n_classes": 14,
+        "n_classes_powerset": 198,
+        "complexity": 2.528,
+        "latex_str": "41473 & yeast & Quantitative & 2417 & 103 & 14 (198) & 2.528"
+    }
+]

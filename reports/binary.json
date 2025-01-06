@@ -1,0 +1,79 @@
+[
+    {
+        "type": "binary",
+        "id": "31",
+        "name": "credit-g",
+        "data_type": "Mixed",
+        "n_samples": 1000,
+        "n_features": 20,
+        "n_classes": 2,
+        "complexity": 0.04,
+        "latex_str": "31 & credit-g & Mixed & 1000 & 20 & 2 & 0.04"
+    },
+    {
+        "type": "binary",
+        "id": "37",
+        "name": "diabetes",
+        "data_type": "Quantitative",
+        "n_samples": 768,
+        "n_features": 8,
+        "n_classes": 2,
+        "complexity": 0.021,
+        "latex_str": "37 & diabetes & Quantitative & 768 & 8 & 2 & 0.021"
+    },
+    {
+        "type": "binary",
+        "id": "44",
+        "name": "spambase",
+        "data_type": "Quantitative",
+        "n_samples": 4601,
+        "n_features": 57,
+        "n_classes": 2,
+        "complexity": 0.025,
+        "latex_str": "44 & spambase & Quantitative & 4601 & 57 & 2 & 0.025"
+    },
+    {
+        "type": "binary",
+        "id": "1462",
+        "name": "banknote-authentication",
+        "data_type": "Quantitative",
+        "n_samples": 1372,
+        "n_features": 4,
+        "n_classes": 2,
+        "complexity": 0.006,
+        "latex_str": "1462 & banknote-authentication & Quantitative & 1372 & 4 & 2 & 0.006"
+    },
+    {
+        "type": "binary",
+        "id": "1479",
+        "name": "hill-valley",
+        "data_type": "Quantitative",
+        "n_samples": 1212,
+        "n_features": 100,
+        "n_classes": 2,
+        "complexity": 0.165,
+        "latex_str": "1479 & hill-valley & Quantitative & 1212 & 100 & 2 & 0.165"
+    },
+    {
+        "type": "binary",
+        "id": "1510",
+        "name": "wdbc",
+        "data_type": "Quantitative",
+        "n_samples": 569,
+        "n_features": 30,
+        "n_classes": 2,
+        "complexity": 0.105,
+        "latex_str": "1510 & wdbc & Quantitative & 569 & 30 & 2 & 0.105"
+    },
+    {
+        "type": "binary",
+        "id": "40945",
+        "name": "Titanic",
+        "data_type": "Mixed",
+        "n_samples": 1309,
+        "n_features": 13,
+        "n_classes": 2,
+        "complexity": 0.02,
+        "latex_str": "40945 & Titanic & Mixed & 1309 & 13 & 2 & 0.02"
+    }
+]
