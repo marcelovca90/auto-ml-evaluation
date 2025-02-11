@@ -1,0 +1,12 @@
+Framework 1,Wins,Effect Size,Magnitude
+autosklearn,5,0.26557871197514354,small
+gama,3,0.3062196930054073,negligible
+fedot,2,0.14015754892191676,negligible
+autogluon,2,0.07748328048444121,negligible
+autopytorch,2,0.04304722970952846,negligible
+4intelligence,2,0.011192188203482204,negligible
+evalml,2,-0.06578328152550188,medium
+flaml,1,0.008804154674690385,small
+autokeras,1,-0.07708541427380096,small
+h2o,1,-0.24136744868887727,large
+naive,0,0.03641342631727247,negligible
