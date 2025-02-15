@@ -35,11 +35,11 @@ frameworks = [
 ]
 
 for scenario, dataset_refs in datasets.items():
-    df, data = pd.read_excel(f'{base_folder}/results/{scenario}.xlsx', sheet_name='f1_score'), {}
+    df, data = pd.read_excel(f'{base_folder}/results/{scenario}/{scenario}.xlsx', sheet_name='f1_score'), {}
     for dataset_ref in dataset_refs:
-        data[dataset_ref] = df[dataset_ref].fillna('0.0 (0.0 Â± 0.0)')
+        data[dataset_ref] = df[dataset_ref].fillna('0.0 (0.0 ± 0.0)')
 
-    pattern = r'(\d+\.\d+)\s+\((\d+\.\d+)\s*Â±\s*(\d+\.\d+)\)'
+    pattern = r'(\d+\.\d+)\s+\((\d+\.\d+)\s*±\s*(\d+\.\d+)\)'
 
     # Extract max, mean, and standard deviation values with error handling
     max_vals, mean_vals, stdev_vals = [], [], []
@@ -90,5 +90,4 @@ for scenario, dataset_refs in datasets.items():
     ax.legend(loc='best', bbox_to_anchor=(1, 1), fontsize=17, title='Frameworks', title_fontsize=18)
 
     plt.tight_layout()
-    plt.savefig(f'{base_folder}/results/f1_score_{scenario}.png', dpi=300)
-    plt.show()
+    plt.savefig(f'{base_folder}/results/{scenario}/f1_score_{scenario}.png', dpi=300)

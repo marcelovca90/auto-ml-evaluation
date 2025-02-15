@@ -227,7 +227,6 @@ source ./venv-utils/bin/activate
 python3.8 -m pip install --upgrade pip
 python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn ydata-profiling distinctipy matplotlib tabulate openpyxl
 python3.8 ./utils_consolidator.py
-python3.8 ./utils_format_json.py
 python3.8 ./utils_plot_f1_scores.py
 python3.8 ./utils_plot_training_times.py
 
