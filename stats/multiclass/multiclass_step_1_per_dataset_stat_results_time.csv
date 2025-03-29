@@ -1,0 +1,8 @@
+scenario,dataset,normal_pairs,normal,homoscedastic_pairs,homoscedastic,parametric,method,p-value,significant
+multiclass,23,15/120,False,0/120,False,False,Kruskal-Wallis + Dunn,1.1e-49,True
+multiclass,36,21/120,False,0/120,False,False,Kruskal-Wallis + Dunn,6.7e-47,True
+multiclass,54,45/120,False,0/120,False,False,Kruskal-Wallis + Dunn,3.4e-47,True
+multiclass,181,6/120,False,0/120,False,False,Kruskal-Wallis + Dunn,5.2e-47,True
+multiclass,1466,36/120,False,0/120,False,False,Kruskal-Wallis + Dunn,5.9e-51,True
+multiclass,40691,3/120,False,0/120,False,False,Kruskal-Wallis + Dunn,1.3e-49,True
+multiclass,40975,36/120,False,0/120,False,False,Kruskal-Wallis + Dunn,3.5e-47,True

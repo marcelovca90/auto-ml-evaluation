@@ -1,0 +1,8 @@
+scenario,dataset,normal_pairs,normal,homoscedastic_pairs,homoscedastic,parametric,method,p-value,significant
+multilabel_powerset,285ps,15/45,False,0/45,False,False,Kruskal-Wallis + Dunn,1.6e-30,True
+multilabel_powerset,41464ps,10/66,False,0/66,False,False,Kruskal-Wallis + Dunn,1.8e-29,True
+multilabel_powerset,41465ps,10/78,False,0/78,False,False,Kruskal-Wallis + Dunn,2.2e-39,True
+multilabel_powerset,41468ps,21/105,False,0/105,False,False,Kruskal-Wallis + Dunn,3.2e-37,True
+multilabel_powerset,41470ps,3/78,False,0/78,False,False,Kruskal-Wallis + Dunn,1.1e-37,True
+multilabel_powerset,41471ps,6/78,False,0/78,False,False,Kruskal-Wallis + Dunn,3.0e-38,True
+multilabel_powerset,41473ps,3/66,False,0/66,False,False,Kruskal-Wallis + Dunn,9.2e-42,True

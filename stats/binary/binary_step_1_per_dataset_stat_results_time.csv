@@ -1,0 +1,8 @@
+scenario,dataset,normal_pairs,normal,homoscedastic_pairs,homoscedastic,parametric,method,p-value,significant
+binary,31,28/120,False,0/120,False,False,Kruskal-Wallis + Dunn,1.4e-52,True
+binary,37,28/120,False,0/120,False,False,Kruskal-Wallis + Dunn,2.9e-52,True
+binary,44,36/120,False,0/120,False,False,Kruskal-Wallis + Dunn,2.5e-53,True
+binary,1462,15/120,False,0/120,False,False,Kruskal-Wallis + Dunn,2.9e-51,True
+binary,1479,36/120,False,0/120,False,False,Kruskal-Wallis + Dunn,1.2e-53,True
+binary,1510,6/120,False,0/120,False,False,Kruskal-Wallis + Dunn,3.3e-50,True
+binary,40945,28/66,False,0/66,False,False,Kruskal-Wallis + Dunn,2.0e-38,True

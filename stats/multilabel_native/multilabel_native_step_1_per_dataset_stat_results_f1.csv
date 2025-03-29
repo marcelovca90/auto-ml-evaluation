@@ -1,0 +1,8 @@
+scenario,dataset,normal_pairs,normal,homoscedastic_pairs,homoscedastic,parametric,method,p-value,significant
+multilabel_native,285,3/6,False,0/6,False,False,Kruskal-Wallis + Dunn,2.0e-09,True
+multilabel_native,41464,3/3,True,0/3,False,False,Kruskal-Wallis + Dunn,4.1e-12,True
+multilabel_native,41465,6/6,True,6/6,True,True,ANOVA + Tukey,4.7e-60,True
+multilabel_native,41468,6/6,True,0/6,False,False,Kruskal-Wallis + Dunn,9.2e-15,True
+multilabel_native,41470,6/6,True,0/6,False,False,Kruskal-Wallis + Dunn,1.7e-14,True
+multilabel_native,41471,3/6,False,6/6,True,False,Kruskal-Wallis + Dunn,3.5e-15,True
+multilabel_native,41473,6/6,True,6/6,True,True,ANOVA + Tukey,3.1e-80,True
