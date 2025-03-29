@@ -5,8 +5,9 @@ import os
 import pandas as pd
 import shutil
 import time
-from common import *
 import matplotlib.pyplot as plt
+import pickle
+from common import *
 
 metric = 'f1_score_weighted'
 
@@ -25,8 +26,11 @@ frameworks = [
 ]
 
 PLOT_COLORS = distinctipy.get_colors(
-    n_colors=len(frameworks), n_attempts=1_000, colorblind_type="Deuteranomaly", exclude_colors=[(0,0,0), (1,1,1), (1,0,0)], rng=42
+    n_colors=len(frameworks), n_attempts=100_000, colorblind_type="Deuteranomaly", exclude_colors=[(0,0,0), (1,1,1), (1,0,0)], rng=42
 )
+
+with open(f"{base_folder}/results/plot_colors.pkl", "wb") as f:
+    pickle.dump(PLOT_COLORS, f)
 
 def format_time(secs):
     return time.strftime("%H:%M:%S", time.gmtime(secs))

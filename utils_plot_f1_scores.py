@@ -1,10 +1,10 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+import pickle
 import re
 import warnings
 from matplotlib import font_manager
-from utils_consolidator import PLOT_COLORS
 
 warnings.filterwarnings("ignore", message=".*Matplotlib is currently using agg.*")
 warnings.filterwarnings("ignore", message=".*FixedFormatter.*")
@@ -21,6 +21,9 @@ for font_file in font_files:
 
 plt.rcParams['font.family'] = ['CMU Serif', 'DejaVu Sans']
 plt.rcParams['text.usetex'] = False
+
+with open(f"{base_folder}/results/plot_colors.pkl", "rb") as f:
+    PLOT_COLORS = pickle.load(f)
 
 datasets = {
     'binary': [31, 37, 44, 1462, 1479, 1510, 40945],
