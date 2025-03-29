@@ -50,8 +50,8 @@ rm -rf Autogluon* &> /dev/null
 rf -rf gama_* &> /dev/null
 rm -rf mlruns* &> /dev/null
 rm -rf structured* &> /dev/null
-# rm -rf results/* &> /dev/null
-# rm -rf venv-* &> /dev/null
+rm -rf results/* &> /dev/null
+rm -rf venv-* &> /dev/null
 rm *.log &> /dev/null
 find . -maxdepth 1 -type d -name "*AutoML*" | xargs rm -rf
 find . -maxdepth 1 -type d -name "*gama_*" | xargs rm -rf
@@ -145,14 +145,14 @@ for id in ${datasets[@]}; do
     sleep 10
 
     # H2O
-    # echo ======== H2O ========
-    # python3.8 -m venv venv-h2o
-    # source ./venv-h2o/bin/activate
-    # python3.8 -m pip install --upgrade pip
-    # python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn requests tabulate future h2o
-    # python3.8 ./automl_h2o.py $id
-    # pkill -f h2o
-    # sleep 10
+    echo ======== H2O ========
+    python3.8 -m venv venv-h2o
+    source ./venv-h2o/bin/activate
+    python3.8 -m pip install --upgrade pip
+    python3.8 -m pip install --upgrade setuptools pytictoc wheel pandas scikit-learn scikit-multilearn requests tabulate future h2o
+    python3.8 ./automl_h2o.py $id
+    pkill -f h2o
+    sleep 10
 
     # LightAutoML
     echo ======== LightAutoML ========
