@@ -56,11 +56,11 @@ y_ticks = {
 }
 
 for scenario, dataset_refs in datasets.items():
-    df, data = pd.read_excel(f'{base_folder}/results/{scenario}.xlsx', sheet_name='training_time'), {}
+    df, data = pd.read_excel(f'{base_folder}/results/{scenario}/{scenario}.xlsx', sheet_name='training_time'), {}
     for dataset_ref in dataset_refs:
-        data[dataset_ref] = df[dataset_ref].fillna('00:00:00 (00:00:00 Â± 00:00:00)')
+        data[dataset_ref] = df[dataset_ref].fillna('00:00:00 (00:00:00 ± 00:00:00)')
 
-    pattern = r'(\d+:\d+:\d+)\s+\((\d+:\d+:\d+)\s*Â±\s*(\d+:\d+:\d+)\)'
+    pattern = r'(\d+:\d+:\d+)\s+\((\d+:\d+:\d+)\s*±\s*(\d+:\d+:\d+)\)'
 
     # Extract min, mean, and standard deviation values with error handling
     min_vals, mean_vals, stdev_vals = [], [], []
@@ -125,5 +125,4 @@ for scenario, dataset_refs in datasets.items():
     ax.legend(loc='best', bbox_to_anchor=(1, 1), fontsize=17, title='Frameworks', title_fontsize=18)
 
     plt.tight_layout()
-    plt.savefig(f'{base_folder}/results/training_time_{scenario}.png', dpi=300)
-    plt.show()
+    plt.savefig(f'{base_folder}/results/{scenario}/training_time_{scenario}.png', dpi=300)

@@ -24,7 +24,7 @@ frameworks = [
 ]
 
 PLOT_COLORS = distinctipy.get_colors(
-    n_colors=len(frameworks), n_attempts=1_000_000, colorblind_type="Deuteranomaly", exclude_colors=[(0,0,0), (1,1,1), (1,0,0)], rng=42
+    n_colors=len(frameworks), n_attempts=1_000, colorblind_type="Deuteranomaly", exclude_colors=[(0,0,0), (1,1,1), (1,0,0)], rng=42
 )
 
 def format_time(secs):
