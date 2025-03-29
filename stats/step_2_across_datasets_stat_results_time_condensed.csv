@@ -1,0 +1,5 @@
+scenario,normality_test,normality_p,normal?,sphericity_test,sphericity_p,spherical?,sphericity_correction,parametric,method,p_value,significant
+binary,Shapiro-Wilk,2.9e-10,False,Mauchly’s Test,1.0000000000000001e-213,0.0,,False,Friedman + Nemenyi,5.7e-11,True
+multiclass,Shapiro-Wilk,1e-10,False,Mauchly’s Test,0.0,0.0,,False,Friedman + Nemenyi,2.4e-13,True
+multilabel_native,Shapiro-Wilk,0.063,True,Mauchly’s Test,1.8e-08,0.0,,False,Friedman + Conover + holm,0.00094,True
+multilabel_powerset,Shapiro-Wilk,2.8e-12,False,Mauchly’s Test,,,,False,Friedman + Nemenyi,0.00016,True

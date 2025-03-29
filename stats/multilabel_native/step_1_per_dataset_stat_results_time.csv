@@ -1,8 +1,0 @@
-dataset,normal,homoscedastic,parametric,method,p-value,significant
-285,False,False,False,Kruskal-Wallis + Dunn,6.70611461914932e-12,True
-41464,False,False,False,Kruskal-Wallis + Dunn,8.687442966701108e-11,True
-41465,False,False,False,Kruskal-Wallis + Dunn,3.688169027696872e-15,True
-41468,False,False,False,Kruskal-Wallis + Dunn,1.350443122030475e-13,True
-41470,False,False,False,Kruskal-Wallis + Dunn,1.2367047762752941e-15,True
-41471,False,False,False,Kruskal-Wallis + Dunn,1.3131992834014296e-15,True
-41473,False,False,False,Kruskal-Wallis + Dunn,3.915777695154622e-14,True

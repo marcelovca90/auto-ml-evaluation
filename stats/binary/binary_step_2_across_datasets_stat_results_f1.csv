@@ -1,0 +1,2 @@
+scenario,normality_test,normality_p,normal?,sphericity_test,sphericity_p,spherical?,sphericity_correction,parametric,method,p_value,significant
+binary,Shapiro-Wilk,7.1e-15,False,Mauchly’s Test,3.3e-200,False,,False,Friedman + Nemenyi,4.8e-06,True
