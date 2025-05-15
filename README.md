@@ -1,6 +1,6 @@
 # A Practical Evaluation of AutoML Tools for Binary, Multiclass, and Multilabel Classification
 
-Authors: *Marcelo Aragão, Augusto Afonso, Rafaela Ferraz, Rairon Ferreira, Sávio Leite, Felipe A. P. de Figueiredo, and Samuel B. Mafra.*
+Authors: *Marcelo V. C. Aragão, Augusto G. Afonso, Rafaela C. Ferraz, Rairon G. Ferreira, Sávio G. Leite, Felipe A. P. de Figueiredo, and Samuel B. Mafra.*
 
 ## Abstract:
     Selecting the most suitable Automated Machine Learning (AutoML) tool is pivotal for
